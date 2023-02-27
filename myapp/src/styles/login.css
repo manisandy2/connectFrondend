@@ -1,79 +1,47 @@
-
-.Container{
-    height: 850px;
-    width: 1730px;
-    color: #d1a206;
-    font-size: large;
-    /* background-color: blue; */
+.login-container {
     display: flex;
-    
-    
-    
-}
-
-.label-input{
-    /* display: flexbox; */
-    /* display: inline; */
-    /* background-color: #d1a206; */
-    flex-direction: row;
-    flex-wrap: nowrap;
-    height: 150px;
-    width: 400px;
-}
-
-.form {
-    /* background-color: #d1a206; */
-    padding-top: 15%;
-    padding-left: 35%;
-    text-align: center;
     justify-content: center;
     align-items: center;
-}
-
-.label{
-    background-color: rgb(39, 189, 59);
-    font-size: 50px;
-    font-weight: 600;
-    background-image: linear-gradient(to left, #1e6e86, #b393d3);
-    color: transparent;
-    background-clip: text;
-    -webkit-background-clip: text;
-}
-
-.Input {
-    position: relative;
+    height: 100vh;
   }
 
-.Input-text {
-    display: block;
-    margin-left: 25%;
-    color: inherit;
-    width: 50%;
-
-    justify-content: center;
-    
-    font-family: inherit;
-    font-size: var(--inputFontSize);
-    font-weight: inherit;
-    
-    border:1px solid red;;
-    border-radius: 0.4rem;
-    
+input {
+    width: 100%;
+    padding: 0.5rem;
+    margin-bottom: 1rem;
+    border-radius: 0.25rem;
+    border: 1px solid #ccc;
   }
 
-  .button {
-    display: inline-block;
-    padding: .75rem 1.25rem;
-    border-radius: 10rem;
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 2rem;
+    border: 1px solid #ccc;
+    border-radius: 0.5rem;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.2);
+  }
+
+  label {
+    font-weight: bold;
+  }
+  
+  button {
+    padding: 0.5rem 1rem;
+    background-color: #007bff;
     color: #fff;
-    text-transform: uppercase;
-    font-size: 1rem;
-    letter-spacing: .15rem;
-    transition: all .3s;
-    position: relative;
-    overflow: hidden;
-    z-index: 1;
-    background-color: #1e6e86;
-    
-    }
+    border: none;
+    border-radius: 0.25rem;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+  }
+  
+  button:hover {
+    background-color: #0069d9;
+  }
   
