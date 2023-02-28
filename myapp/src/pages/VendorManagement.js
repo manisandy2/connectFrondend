@@ -1,40 +1,39 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../styles/lightmanagement.css";
 
-
-export default function LightManagement() {
+function VendorManagement() {
   const [products, setProducts] = useState([]);
+
   const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/light/");
+    const { data } = await Axios.get("http://127.0.0.1:8000/api/vendor/");
+
     const products = data.results;
     setProducts(products);
     console.log(products);
   };
-
   useEffect(() => {
     fetchProducts();
   }, []);
 
   return (
     <div>
-      LightManagement
+      VendorManagement
       <table>
         <thead>
           <tr>
-            <th>S No</th>
-            <th> Name</th>
-            <th>Status</th>
-            <th>Edit</th>
+            <td>S no</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Edit</td>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
-              <td >{product.id}</td>
-              <td >{product.name}</td>
-              <td >{product.status.name}</td>
-              <td >Edit</td>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.status.name}</td>
+              <td>Edit</td>
             </tr>
           ))}
         </tbody>
@@ -42,3 +41,5 @@ export default function LightManagement() {
     </div>
   );
 }
+
+export default VendorManagement;

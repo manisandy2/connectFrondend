@@ -1,0 +1,31 @@
+.full-box{
+    background-color: blueviolet;
+    display: flex;
+    height: 800px;
+    width: 100%;
+    justify-content: center;
+    align-items: start;
+}
+
+h2{
+    display: flex;
+    width: 50%;
+    background-color: aqua;
+    margin-top: 5%;
+    border-radius: 30px;
+    justify-content: center;
+    align-items: center;
+    
+}
+
+
+
+
+form{
+    width: 50%;
+    
+}
+
+button{
+    width: 50%;
+}

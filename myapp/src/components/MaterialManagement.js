@@ -1,10 +1,10 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 
-function AssetManagement() {
-  const [products, setProducts] = useState([]);
-  const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/asset/");
+function MaterialManagement() {
+    const [products, setProducts] = useState([]);
+    const fetchProducts = async () => {
+    const { data } = await Axios.get("http://127.0.0.1:8000/api/material/");
     const products = data.results;
     setProducts(products);
     console.log(products);
@@ -13,11 +13,9 @@ function AssetManagement() {
   useEffect(() => {
     fetchProducts();
   }, []);
-
   return (
-    <div>
-      AssetManagement
-      <table>
+    <div>MaterialManagement
+        <table>
         <thead>
           <tr>
 
@@ -58,7 +56,7 @@ function AssetManagement() {
         </tbody>
       </table>
     </div>
-  );
+  )
 }
 
-export default AssetManagement;
+export default MaterialManagement

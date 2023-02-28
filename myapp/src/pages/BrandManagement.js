@@ -1,12 +1,12 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../styles/lightmanagement.css";
 
-
-export default function LightManagement() {
+function BrandManagement() {
   const [products, setProducts] = useState([]);
+
   const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/light/");
+    const { data } = await Axios.get("http://127.0.0.1:8000/api/brand/");
+
     const products = data.results;
     setProducts(products);
     console.log(products);
@@ -18,27 +18,30 @@ export default function LightManagement() {
 
   return (
     <div>
-      LightManagement
+      BrandManagement
       <table>
         <thead>
           <tr>
-            <th>S No</th>
-            <th> Name</th>
-            <th>Status</th>
-            <th>Edit</th>
+            <td>S No</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Edit</td>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
             <tr key={product.id}>
-              <td >{product.id}</td>
-              <td >{product.name}</td>
-              <td >{product.status.name}</td>
-              <td >Edit</td>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.status.name}</td>
+              <td>Edit</td>
             </tr>
           ))}
+          ;
         </tbody>
       </table>
     </div>
   );
 }
+
+export default BrandManagement;

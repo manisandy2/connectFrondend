@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from "react";
 import Axios from "axios";
-import "../styles/classmanagement.css";
+import "./Styles/classmanagement.css"
+import * as BsPlusCircle  from "react-icons/bs";
+import { Link } from 'react-router-dom';
 
 export default function ClassManagement() {
   const [products, setProducts] = useState([]);
@@ -19,6 +21,11 @@ export default function ClassManagement() {
   return (
     <div>
       <h2>Class Management</h2>
+      <div >
+      {/* <BsPlusCircle.BsPlusCircle  /> */}
+        <Link to="/Management/add/class">New Data</Link>
+        </div> 
+
 
       <table>
         <thead>
