@@ -1,7 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import "../styles/lightmanagement.css";
-
+import "./Styles/light.css";
+import { Link } from "react-router-dom";
 
 export default function LightManagement() {
   const [products, setProducts] = useState([]);
@@ -17,8 +17,17 @@ export default function LightManagement() {
   }, []);
 
   return (
-    <div>
+    <div className="container-box">
+      <h2>
+
       LightManagement
+
+      </h2>
+      <div className="createButton">
+        <Link className="linkbutton" to="/Management/add/Light"> + Light </Link>
+      </div>
+
+      {/* <Link className="linkbutton" to="/Management/add/class"> + Light </Link> */}
       <table>
         <thead>
           <tr>

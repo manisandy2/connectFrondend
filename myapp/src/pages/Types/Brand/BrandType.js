@@ -16,7 +16,10 @@ function BrandType() {
 
   return (
     <div>
+        <h2>
+
       BrandType
+        </h2>
       <table>
         <thead>
           <tr>

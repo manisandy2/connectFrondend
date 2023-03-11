@@ -1,10 +1,13 @@
+import React from 'react'
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+function Asset() {
+    const [products, setProducts] = useState([]);
 
-function AssetManagement() {
-  const [products, setProducts] = useState([]);
   const fetchProducts = async () => {
     const { data } = await Axios.get("http://127.0.0.1:8000/api/asset/");
+
     const products = data.results;
     setProducts(products);
     console.log(products);
@@ -13,10 +16,12 @@ function AssetManagement() {
   useEffect(() => {
     fetchProducts();
   }, []);
-
   return (
-    <div>
-      AssetManagement
+    <div className="container-box">
+      <h2>Asset</h2>
+      <div className="createButton">
+        <Link className="linkbutton" to="/Management/add/asset"> + Brand </Link>
+      </div>
       <table>
         <thead>
           <tr>
@@ -61,4 +66,8 @@ function AssetManagement() {
   );
 }
 
-export default AssetManagement;
+export default Asset
+
+
+
+

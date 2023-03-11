@@ -1,10 +1,10 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Styles/classadd.css";
-import { useNavigate } from "react-router-dom";
+// import "./Styles/classadd.css";
+import { Link,useNavigate } from "react-router-dom";
 
 
-function ClassAdd() {
+function BrandAdd() {
   const [name, setName] = useState("");
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
@@ -12,7 +12,7 @@ function ClassAdd() {
 
   useEffect(() => {
     const fetchData = async () => {
-      const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
+      const { data } = await Axios.get(`http://127.0.0.1:8000/api/status/`);
       const products = data.results;
       setProducts(products);
     };
@@ -24,27 +24,26 @@ function ClassAdd() {
 
   const productPost = (e) => {
     e.preventDefault();
-    Axios.post("http://127.0.0.1:8000/api/classPost", {
+    Axios.post("http://127.0.0.1:8000/api/classPost/", {
       name,
       status: productName,
     })
       .then((res) => navigate('/Management/class/'))
       // .then((res) => console.log("posting data", res))
       .catch((err) => console.log(err));
-    // const redirect = () => navigate('/Management/class/')
   
     };
-
 
 
   const handleChange = (e) => {
     setProductName(e.target.value);
   };
 
+
   return (
     <div className="full-box">
       <div className="container">
-        <h2>Add Class</h2>
+        <h2>Brand Add</h2>
         <form >
           <label>Name</label>
           <input
@@ -63,16 +62,15 @@ function ClassAdd() {
               </option>
             ))}
           </select>
-          {/* <button onClick={productPost}>Click</button> */}
-          {/* <button >Click</button> */}
+  
      
           <button onClick={productPost}> Click </button>
-          <button onClick= {() => navigate('/Management/class')}> Back </button>
+          <button onClick= {() => navigate('/Management/class/')}> Back </button>
           
         </form> 
       </div>
     </div>
-  );
+  )
 }
 
-export default ClassAdd;
+export default BrandAdd

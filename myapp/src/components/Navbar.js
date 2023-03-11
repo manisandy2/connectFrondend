@@ -11,6 +11,10 @@ function Navbar() {
 
   const showSidebar = () => setSidebar(!sidebar);
 
+  const mouseHover = () => {
+    console.log("click")
+  }
+
   return (
     <>
       <IconContext.Provider value={{ color: '#fff' }}>

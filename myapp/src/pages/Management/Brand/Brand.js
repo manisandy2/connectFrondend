@@ -1,5 +1,7 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import "./Styles/brand.css"
 
 function BrandManagement() {
   const [products, setProducts] = useState([]);
@@ -17,8 +19,11 @@ function BrandManagement() {
   }, []);
 
   return (
-    <div>
-      BrandManagement
+    <div className="container-box">
+      <h2>BrandManagement</h2>
+      <div className="createButton">
+        <Link className="linkbutton" to="/Management/add/brand"> + Brand </Link>
+      </div>
       <table>
         <thead>
           <tr>

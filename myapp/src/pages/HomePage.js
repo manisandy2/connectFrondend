@@ -10,9 +10,9 @@ function HomePage() {
   return (
     <div>
         <p>You are logged to home page!</p>
-        <p>{but}</p>
+        {/* <p>{but}</p>
         <button >Submit</button>
-        {/* <button onClick={() => (setBut(but+1)) }>Submit</button> */}
+         */}
     </div>
   )
 }

@@ -1,0 +1,12 @@
+.container-box{
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+
+
+h2{
+    display: grid;
+    width: 100%;
+}

@@ -1,5 +1,6 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 function ShowroomDetails() {
   const [products, setProducts] = useState([]);
@@ -15,8 +16,14 @@ function ShowroomDetails() {
   }, []);
 
   return (
-    <div>
+    <div className="container-box">
+      <h2>
       ShowroomDetails
+        </h2>
+        <div className="createButton">
+        <Link className="linkbutton" to="/OutletMedia/add/Showroom"> + Show Room </Link>
+      </div>
+
       <table>
         <thead>
           <tr>

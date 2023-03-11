@@ -86,17 +86,17 @@ export const SidebarData = [
     subNav: [
       {
         title: "Brand Type",
-        path: "/Type/BrandType",
+        path: "/Types/Brand/BrandType",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
         title: "Material Type",
-        path: "/Type/MaterialType",
+        path: "Types/Material/MaterialType",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
         title: "Light Type",
-        path: "/Type/LightType",
+        path: "/Types/Light/LightType",
         icon: <AiIcons.AiOutlineBank />,
       },
     ],
