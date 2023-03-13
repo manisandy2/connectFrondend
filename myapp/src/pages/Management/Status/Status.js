@@ -4,41 +4,42 @@ import { Container } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 
-function MaterialManagement() {
-    const [products, setProducts] = useState([]);
-    const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/material");
+function StatusManagement() {
+  const [products, setProducts] = useState([]);
+
+  const fetchProducts = async () => {
+    const { data } = await Axios.get("http://127.0.0.1:8000/api/statusManagement");
+
     const products = data.results;
     setProducts(products);
     console.log(products);
   };
-
   useEffect(() => {
     fetchProducts();
   }, []);
+
   return (
     <Container>
+
     <div>
-        <h2>
-        Material Management
-        </h2>
-        <table>
+      <h2>Status Management</h2>
+      <table>
         <thead>
           <tr>
-
-            <th>S No</th>
-            <th>Name</th>
-            <th>Status</th>       
-            <th>Edit </th>
+            <td>S no</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Edit</td>
           </tr>
         </thead>
         <tbody>
           {products.map((product) => (
-            <tr key={product.id}>
-              <td> {product.id}</td>
-              <td> {product.name}</td>
-              <td> {product.status.name}</td>
-              <td> 
+              <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.VisibilityList.Visibility}</td>
+              <td>{product.status.name}</td>
+              <td>
                 <span><FaIcons.FaEdit /></span>
                 <span><AiIcons.AiFillDelete /></span>
               </td>
@@ -47,8 +48,8 @@ function MaterialManagement() {
         </tbody>
       </table>
     </div>
-    </Container>
-  )
+          </Container>
+  );
 }
 
-export default MaterialManagement
+export default StatusManagement;

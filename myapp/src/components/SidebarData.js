@@ -90,11 +90,6 @@ export const SidebarData = [
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "Material Type",
-        path: "Types/Material/MaterialType",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-      {
         title: "Light Type",
         path: "/Types/Light/LightType",
         icon: <AiIcons.AiOutlineBank />,
@@ -110,7 +105,7 @@ export const SidebarData = [
     subNav: [
       {
         title: "Class",
-        path: "/Management/class",
+        path: "/Management/Class",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
@@ -124,7 +119,7 @@ export const SidebarData = [
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "MaterialManagement",
+        title: "Material",
         path: "/Management/Material",
         icon: <AiIcons.AiOutlineBank />,
       },

@@ -1,15 +1,27 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-import "./Styles/classadd.css";
-import { useNavigate } from "react-router-dom";
-
+// import "./Styles/classadd.css";
+import { useNavigate, useParams } from "react-router-dom";
+import {
+  Container,
+  Select,
+  TextField,
+  MenuItem,
+  FormControl,
+  Button,
+} from "@mui/material";
+import ApiService from "../../../service/ApiService";
 
 function ClassAdd() {
   const [name, setName] = useState("");
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
 
+  let { id } = useParams();
 
+  console.log(id);
+
+  const navigate = useNavigate();
   useEffect(() => {
     const fetchData = async () => {
       const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
@@ -19,58 +31,82 @@ function ClassAdd() {
     fetchData();
   }, []);
 
-  const navigate = useNavigate();
+  const classData = { name: name, status: productName };
 
+  console.log(classData);
 
-  const productPost = (e) => {
+  function title() {
+    if (id) {
+      return "Updata Class";
+    } else {
+      return "Add Class";
+    }
+  }
+
+  useEffect(() => {
+    if (id) {
+      ApiService.getClassById(id)
+        .then((res) => {
+          setName(res.data.name);
+          setProductName(res.data.status);
+        })
+
+        .catch((e) => console.log(e));
+    }
+  }, []);
+
+  function saveClass(e) {
     e.preventDefault();
-    Axios.post("http://127.0.0.1:8000/api/classPost", {
-      name,
-      status: productName,
-    })
-      .then((res) => navigate('/Management/class/'))
-      // .then((res) => console.log("posting data", res))
-      .catch((err) => console.log(err));
-    // const redirect = () => navigate('/Management/class/')
-  
-    };
-
-
+    if (classData.name !== "" && classData.status !== "") {
+      if (id) {
+        ApiService.updateClass(id, classData)
+          .then(navigate("/Management/class/"))
+          .catch((e) => console.log(e));
+      } else {
+        ApiService.saveClass(classData)
+          .then(navigate("/Management/class/"))
+          .catch((e) => console.log(e));
+      }
+    } else alert("Please Enter the Value");
+  }
 
   const handleChange = (e) => {
     setProductName(e.target.value);
   };
 
   return (
-    <div className="full-box">
-      <div className="container">
-        <h2>Add Class</h2>
-        <form >
-          <label>Name</label>
-          <input
-            type={"text"}
+    <div>
+      <Container sx={{ width: 300, height: 300 }}>
+        <h2>{title()}</h2>
+        <FormControl fullWidth>
+          <TextField
+            variant="outlined"
+            label="Name"
             value={name}
             onChange={(e) => setName(e.target.value)}
-          ></input>
+          />
 
-          <label>Status</label>
-          <select value={productName} onChange={handleChange}>
-            <option value="">Choose Status</option>
-
+          <br />
+          <Select label="Status" value={productName} onChange={handleChange}>
             {products.map((product, index) => (
-              <option value={product.id} key={index}>
+              <MenuItem value={product.id} key={index}>
                 {product.name}
-              </option>
+              </MenuItem>
             ))}
-          </select>
-          {/* <button onClick={productPost}>Click</button> */}
-          {/* <button >Click</button> */}
-     
-          <button onClick={productPost}> Click </button>
-          <button onClick= {() => navigate('/Management/class')}> Back </button>
-          
-        </form> 
-      </div>
+          </Select>
+          <br />
+          <Button variant="contained" onClick={(e) => saveClass(e)}>
+            Click
+          </Button>
+          <br />
+          <Button
+            variant="contained"
+            onClick={() => navigate("/Management/class")}
+          >
+            Back
+          </Button>
+        </FormControl>
+      </Container>
     </div>
   );
 }

@@ -4,14 +4,22 @@ import { Routes, Route } from "react-router-dom";
 // import { SidebarData } from "./components/SidebarData";
 import About from "./pages/About";
 // import AssetManagement from "./pages/AssetManagement";
+
+
 import BrandLocation from "./pages/Management/BrandLocation/BrandLocation";
-import Brand from "./pages/Management/Brand/Brand";
+import ClassManagement from "./pages/Management/Class/Class";
+import BrandManagement from "./pages/Management/Brand/Brand";
+import MaterialManagement from "./pages/Management/Material/Material";
+import VendorManagement from "./pages/Management/Vendor/Vendor";
 
 
 import ClassAdd from "./pages/Management/Class/ClassAdd";
-import ClassManagement from "./pages/Management/Class/Class";
-import LightManagement from "./pages/Management/Light/Light";
 import BrandAdd from "./pages/Management/Brand/BrandAdd";
+
+
+import BrandType from "./pages/Types/Brand/BrandType"
+import LightType from "./pages/Types/Light/LightType";
+
 
 
 import Asset from "./pages/OutletMedia/Asset/Asset";
@@ -20,21 +28,15 @@ import ShowroomDetails from "./pages/OutletMedia/ShowRoom/ShowroomDetails";
 import ShowroomAdd from "./pages/OutletMedia/ShowRoom/ShowroomAdd";
 
 
-import BrandType from "./pages/Types/Brand/BrandType"
-
-
 import Dashboard from "./pages/Dashboard";
 import HomePage from "./pages/HomePage";
 import LoginPage from "./pages/LoginPage";
-import MaterialManagement from "./pages/MaterialManagement";
+
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
+import StatusManagement from "./pages/Management/Status/Status";
 
 
-import VendorManagement from "./pages/VendorManagement";
-import MaterialType from "./pages/Types/Material/MaterialType";
-import LightType from "./pages/Types/Light/LightType";
-import UpdateProduct from "./pages/Management/Class/UpdateProduct";
 // import LogoutPage from './pages/LogoutPage';
 
 function App() {
@@ -51,14 +53,16 @@ function App() {
 
           ########################### Management ##############################
 
-          <Route path="/Management/class" element={<ClassManagement />} /> 
-          <Route path="/Management/class/update/:id" element={<UpdateProduct/>} /> 
-          <Route path="/Management/add/class" element={<ClassAdd/>} /> 
-          <Route path="/Management/Brand" element={<Brand/>} /> 
-          <Route path="/Management/add/Brand" element={<BrandAdd/>} /> 
-          <Route path="/Management/Vendor" element={<VendorManagement/>} /> 
+          <Route path="/Management/class" element={<ClassManagement />} />
+          <Route path="/Management/Brand" element={<BrandManagement/>} /> 
           <Route path="/Management/BrandLocation" element={<BrandLocation/>} /> 
           <Route path="/Management/Material" element={<MaterialManagement/>} /> 
+          <Route path="/Management/Vendor" element={<VendorManagement/>} /> 
+          <Route path="/Management/Status" element={<StatusManagement/>} /> 
+
+          <Route path="/Management/add/class" element={<ClassAdd/>} /> 
+          <Route path="/Management/add/class/:id" element={<ClassAdd/>} /> 
+          <Route path="/Management/add/Brand" element={<BrandAdd/>} /> 
           
           ########################### OutletMedia ###############################
           
@@ -70,7 +74,6 @@ function App() {
           ########################### Types ##################################### 
    
           <Route path="/Types/Brand/BrandType" element={<BrandType />} />  
-          <Route path="/Types/Material/MaterialType" element={<MaterialType/>} />  
           <Route path="/Types/Light/LightType" element={<LightType/>} />  
       </Routes>
     </div>

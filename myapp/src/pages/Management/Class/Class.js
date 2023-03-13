@@ -1,68 +1,81 @@
 import React, { useEffect, useState } from "react";
-import Axios from "axios";
+// import Axios from "axios";
 import "./Styles/class.css";
 import { Link } from "react-router-dom";
-import Box from "@mui/material/Box";
+// import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Container } from "@mui/system";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import ApiService from "../../../service/ApiService";
 
 export default function ClassManagement() {
-  const [products, setProducts] = useState([]);
+  const [products, setproducts] = useState([]);
 
-  const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/classGet");
-    const products = data.results;
-    setProducts(products);
-    console.log(products);
-  };
 
   useEffect(() => {
-    fetchProducts();
+    getAllClass();
   }, []);
 
-  return (
-    <div>
-      <Box sx={{ "& > :not(style)": { m: 1 } }}>
-        <Container>
-          <h2>Class Management</h2>
-        </Container>
-        <Container>
-          <Link to="/Management/add/class">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Container>
+  const getAllClass = async ()  => {
+    const { data }  = await ApiService.getAllClass()
+      // .then(res=>{products(res.data); console.log(res.data)})
+      // .catch((e) => console.log(e));
+      const products = data.results
+      setproducts(products)
+      
+  }
 
-        <Container>
-          <table>
-            <thead>
-              <tr>
-                <th>S No</th>
-                <th>Name</th>
-                <th>Status</th>
-                <th>Edit</th>
+  function deleteClass(e,id) {
+    e.preventDefault();
+    ApiService.deleteClass(id).then(getAllClass()).catch(
+      e=>console.log(e)
+    )
+  }
+
+  return (
+    <Container>
+      <div>
+        <h2>Class Management</h2>
+
+        <Link to="/Management/add/class">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+        <br/>
+        <br/>
+        <table>
+          <thead>
+            <th>S No</th>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Actions</th>
+          </thead>
+          <tbody>
+            {products.map((product) => (
+              <tr id={product.id}>
+                <td>{product.id}</td>
+                <td>{product.name}</td>
+                <td>{product.status.name}</td>
+                <td>
+                  <Link to={"/Management/add/class/" + product.id}>
+                    <span className="update">
+                      <FaIcons.FaEdit />
+                    </span>
+                  </Link>
+                  <span>
+                    <a onClick={(e) => {deleteClass(e,product.id)}}>
+                    <AiIcons.AiFillDelete />
+                    </a>
+                  </span>
+                </td>
               </tr>
-            </thead>
-            <tbody>
-              {products.map((product) => (
-                <tr key={product.id}>
-                  <td>{product.id}</td>
-                  <td>{product.name}</td>
-                  <td>{product.status.name}</td>
-                  {/* <td>{product.id} </td> */}
-                  <td>
-                    <Link to={"update/" + product.id}>
-                      <span className="update">Update</span>
-                    </Link>
-                  </td>
-                </tr>
-              ))}
-            </tbody>
-          </table>
-        </Container>
-      </Box>
-    </div>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </Container>
   );
 }
