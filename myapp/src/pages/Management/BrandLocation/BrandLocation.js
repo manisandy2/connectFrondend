@@ -1,51 +1,86 @@
-import { Container } from "@mui/material";
+import { Container, Typography } from "@mui/material";
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import { Link } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import ApiService from "../../../service/ApiService";
 
 function BrandLocation() {
-  const [products, setProducts] = useState([]);
 
-  const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/brandLocation");
-
-    const products = data.results;
-    setProducts(products);
-    console.log(products);
-  };
+  const [brandLocationArray,setbrandLocationArray] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
+    getAllBrandLocation();
   }, []);
+
+  const getAllBrandLocation = async () => {
+    const { data } = await ApiService.getAllBrandLocation();
+    const brandLocationArray = data.results;
+    setbrandLocationArray(brandLocationArray);
+  };
+
+  function deleteClass(e, id) {
+    e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this Class")) {
+      ApiService.deleteBrandLocation(id)
+        .then(getAllBrandLocation())
+        .catch((e) => console.log(e));
+    }
+  }
+
   return (
     <Container>
-      <div>
-        <h2> Brand Location </h2>
-        <table>
-          <thead>
-            <tr>
-              <td>S No</td>
-              <td>Name</td>
-              <td>Status</td>
-              <td>Edit</td>
+      <Typography
+        variant="h3"
+        textAlign={"center"}
+        paddingTop={5}
+        paddingBottom={5}
+      >
+        Brand Location
+      </Typography>
+
+      <Container sx={{ textAlign: "end" }}>
+        <Link to="/Management/add/BrandLocation">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
+
+      <table>
+        <thead>
+          <tr>
+            <td>S No</td>
+            <td>Name</td>
+            <td>Status</td>
+            <td>Edit</td>
+          </tr>
+        </thead>
+        <tbody>
+          {brandLocationArray.map((product) => (
+            <tr key={product.id}>
+              <td>{product.id}</td>
+              <td>{product.name}</td>
+              <td>{product.status.name}</td>
+              <td>
+                <span>
+                <Link to={"/Management/add/BrandLocation/" + product.id}>
+                    <span>
+                      <FaIcons.FaEdit />
+                    </span>
+                  </Link>
+                </span>
+                <span>
+                  <AiIcons.AiFillDelete />
+                </span>
+              </td>
             </tr>
-          </thead>
-          <tbody>
-            {products.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.status.name}</td>
-                <td>
-                  <span><FaIcons.FaEdit /></span>
-                  <span><AiIcons.AiFillDelete /></span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+          ))}
+        </tbody>
+      </table>
     </Container>
   );
 }

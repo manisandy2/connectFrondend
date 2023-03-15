@@ -3,6 +3,7 @@ import React, { useEffect, useState } from "react";
 import { Container } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
+import { Typography } from "@mui/material";
 
 function BrandType() {
   const [products, setProducts] = useState([]);
@@ -20,7 +21,15 @@ function BrandType() {
   return (
     <Container>
     <div>
-      <h2>Brand Type</h2>
+      
+      <Typography
+          variant="h3"
+          textAlign={"center"}
+          paddingTop={5}
+          paddingBottom={5}
+        >
+          Brand Type
+        </Typography>
       <table>
         <thead>
           <tr>

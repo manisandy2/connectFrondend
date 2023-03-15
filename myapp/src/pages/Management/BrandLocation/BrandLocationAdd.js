@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import ApiService from "../../../service/ApiService";
 
-function ClassAdd() {
+function BrandLocationAdd() {
   const [name, setName] = useState("");
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
@@ -23,14 +23,6 @@ function ClassAdd() {
   console.log(id);
 
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
-  //     const products = data.results;
-  //     setProducts(products);
-  //   };
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     getAllStatus();
@@ -49,15 +41,15 @@ function ClassAdd() {
 
   function title() {
     if (id) {
-      return "Updata Class";
+      return "Updata Brand Location";
     } else {
-      return "Add Class";
+      return "Brand Location Add";
     }
   }
 
   useEffect(() => {
     if (id) {
-      ApiService.getClassById(id)
+      ApiService.getBrandLocationId(id)
         .then((res) => {
           setName(res.data.name);
           setProductName(res.data.status);
@@ -71,12 +63,12 @@ function ClassAdd() {
     e.preventDefault();
     if (classData.name !== "" && classData.status !== "") {
       if (id) {
-        ApiService.updateClass(id, classData)
-          .then(navigate("/Management/class/"))
+        ApiService.updateBrandLocation(id, classData)
+          .then(navigate("/Management/BrandLocation/"))
           .catch((e) => console.log(e));
       } else {
         ApiService.saveClass(classData)
-          .then(navigate("/Management/class/"))
+          .then(navigate("/Management/BrandLocation/"))
           .catch((e) => console.log(e));
       }
     } else alert("Please Enter the Value");
@@ -91,6 +83,7 @@ function ClassAdd() {
       <Container sx={{ width: 300, height: 300 }}>
         <Typography padding={3} variant="h5" textAlign={"center"}>
           {title()}
+          
         </Typography>
         <FormControl fullWidth>
           <TextField
@@ -115,7 +108,7 @@ function ClassAdd() {
           <br />
           <Button
             variant="contained"
-            onClick={() => navigate("/Management/Class")}
+            onClick={() => navigate("/Management/BrandLocation")}
           >
             Back
           </Button>
@@ -125,4 +118,4 @@ function ClassAdd() {
   );
 }
 
-export default ClassAdd;
+export default BrandLocationAdd;

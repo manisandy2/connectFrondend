@@ -9,43 +9,52 @@ import { Container } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import ApiService from "../../../service/ApiService";
+import { Alert, Typography } from "@mui/material";
 
-export default function ClassManagement() {
-  const [products, setproducts] = useState([]);
-
+export default function Class() {
+  const [classArray, setclassArray] = useState([]);
 
   useEffect(() => {
     getAllClass();
   }, []);
 
-  const getAllClass = async ()  => {
-    const { data }  = await ApiService.getAllClass()
-      // .then(res=>{products(res.data); console.log(res.data)})
-      // .catch((e) => console.log(e));
-      const products = data.results
-      setproducts(products)
-      
+  const getAllClass = async () => {
+    const { data } = await ApiService.getAllClass();
+
+    const classArray = data.results;
+    setclassArray(classArray);
+  };
+
+  function deleteClass(e, id) {
+    e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this Class")) {
+      ApiService.deleteClass(id)
+        .then(getAllClass())
+        .catch((e) => console.log(e));
+    }
   }
 
-  function deleteClass(e,id) {
-    e.preventDefault();
-    ApiService.deleteClass(id).then(getAllClass()).catch(
-      e=>console.log(e)
-    )
-  }
+  console.log(ApiService.postClassAddLink)
 
   return (
     <Container>
       <div>
-        <h2>Class Management</h2>
+        <Typography
+          variant="h3"
+          textAlign={"center"}
+          paddingTop={5}
+          paddingBottom={5}
+        >
+          Class Management
+        </Typography>
+        <Container sx={{ textAlign: "end" }}>
+          <Link to={<ApiService.postClassAddLink/>}>
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Link>
+        </Container>
 
-        <Link to="/Management/add/class">
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
-        </Link>
-        <br/>
-        <br/>
         <table>
           <thead>
             <th>S No</th>
@@ -54,20 +63,24 @@ export default function ClassManagement() {
             <th>Actions</th>
           </thead>
           <tbody>
-            {products.map((product) => (
-              <tr id={product.id}>
+            {classArray.map((product) => (
+              <tr key={product.id}>
                 <td>{product.id}</td>
                 <td>{product.name}</td>
                 <td>{product.status.name}</td>
                 <td>
-                  <Link to={"/Management/add/class/" + product.id}>
-                    <span className="update">
+                  <Link to={"/Management/add/Class/" + product.id}>
+                    <span>
                       <FaIcons.FaEdit />
                     </span>
                   </Link>
                   <span>
-                    <a onClick={(e) => {deleteClass(e,product.id)}}>
-                    <AiIcons.AiFillDelete />
+                    <a
+                      onClick={(e) => {
+                        deleteClass(e, product.id);
+                      }}
+                    >
+                      <AiIcons.AiFillDelete />
                     </a>
                   </span>
                 </td>

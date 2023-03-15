@@ -6,15 +6,18 @@ import About from "./pages/About";
 // import AssetManagement from "./pages/AssetManagement";
 
 
+import Class from "./pages/Management/Class/Class";
+import Brand from "./pages/Management/Brand/Brand";
 import BrandLocation from "./pages/Management/BrandLocation/BrandLocation";
-import ClassManagement from "./pages/Management/Class/Class";
-import BrandManagement from "./pages/Management/Brand/Brand";
-import MaterialManagement from "./pages/Management/Material/Material";
-import VendorManagement from "./pages/Management/Vendor/Vendor";
+import Material from "./pages/Management/Material/Material";
+import Vendor from "./pages/Management/Vendor/Vendor";
 
 
 import ClassAdd from "./pages/Management/Class/ClassAdd";
 import BrandAdd from "./pages/Management/Brand/BrandAdd";
+import BrandLocationAdd from "./pages/Management/BrandLocation/BrandLocationAdd";
+import MaterialAdd from "./pages/Management/Material/MaterialAdd";
+import VendorAdd from "./pages/Management/Vendor/VendorAdd";
 
 
 import BrandType from "./pages/Types/Brand/BrandType"
@@ -53,16 +56,24 @@ function App() {
 
           ########################### Management ##############################
 
-          <Route path="/Management/class" element={<ClassManagement />} />
-          <Route path="/Management/Brand" element={<BrandManagement/>} /> 
+          <Route path="/Management/Class" element={<Class />} />
+          <Route path="/Management/Brand" element={<Brand/>} /> 
           <Route path="/Management/BrandLocation" element={<BrandLocation/>} /> 
-          <Route path="/Management/Material" element={<MaterialManagement/>} /> 
-          <Route path="/Management/Vendor" element={<VendorManagement/>} /> 
+          <Route path="/Management/Material" element={<Material/>} /> 
+          <Route path="/Management/Vendor" element={<Vendor/>} /> 
           <Route path="/Management/Status" element={<StatusManagement/>} /> 
 
-          <Route path="/Management/add/class" element={<ClassAdd/>} /> 
-          <Route path="/Management/add/class/:id" element={<ClassAdd/>} /> 
-          <Route path="/Management/add/Brand" element={<BrandAdd/>} /> 
+          <Route path="/Management/add/Class" element={<ClassAdd/>} /> 
+          <Route path="/Management/add/Class/:id" element={<ClassAdd/>} /> 
+          <Route path="/Management/add/Brand" element={<BrandAdd/>} />
+          <Route path="/Management/add/Brand/:id" element={<BrandAdd/>} />
+          <Route path="/Management/add/BrandLocation" element={<BrandLocationAdd />} /> 
+          <Route path="/Management/add/BrandLocation/:id" element={<BrandLocationAdd />} /> 
+          <Route path="/Management/add/Material" element={<MaterialAdd/>} /> 
+          <Route path="/Management/add/Material/:id" element={<MaterialAdd/>} /> 
+          <Route path="/Management/add/Vendor" element={<VendorAdd/>} /> 
+          <Route path="/Management/add/Vendor/:id" element={<VendorAdd/>} /> 
+
           
           ########################### OutletMedia ###############################
           

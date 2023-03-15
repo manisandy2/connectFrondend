@@ -13,7 +13,7 @@ import {
 } from "@mui/material";
 import ApiService from "../../../service/ApiService";
 
-function ClassAdd() {
+function MaterialAdd() {
   const [name, setName] = useState("");
   const [products, setProducts] = useState([]);
   const [productName, setProductName] = useState("");
@@ -23,14 +23,7 @@ function ClassAdd() {
   console.log(id);
 
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
-  //     const products = data.results;
-  //     setProducts(products);
-  //   };
-  //   fetchData();
-  // }, []);
+
 
   useEffect(() => {
     getAllStatus();
@@ -49,15 +42,15 @@ function ClassAdd() {
 
   function title() {
     if (id) {
-      return "Updata Class";
+      return "Updata Material";
     } else {
-      return "Add Class";
+      return "Add Material";
     }
   }
 
   useEffect(() => {
     if (id) {
-      ApiService.getClassById(id)
+      ApiService.getMaterialId(id)
         .then((res) => {
           setName(res.data.name);
           setProductName(res.data.status);
@@ -71,12 +64,12 @@ function ClassAdd() {
     e.preventDefault();
     if (classData.name !== "" && classData.status !== "") {
       if (id) {
-        ApiService.updateClass(id, classData)
-          .then(navigate("/Management/class/"))
+        ApiService.updateMaterial(id, classData)
+          .then(navigate("/Management/Material"))
           .catch((e) => console.log(e));
       } else {
-        ApiService.saveClass(classData)
-          .then(navigate("/Management/class/"))
+        ApiService.saveMaterial(classData)
+          .then(navigate("/Management/Material"))
           .catch((e) => console.log(e));
       }
     } else alert("Please Enter the Value");
@@ -115,7 +108,7 @@ function ClassAdd() {
           <br />
           <Button
             variant="contained"
-            onClick={() => navigate("/Management/Class")}
+            onClick={() => navigate("/Management/Material")}
           >
             Back
           </Button>
@@ -125,4 +118,6 @@ function ClassAdd() {
   );
 }
 
-export default ClassAdd;
+export default MaterialAdd;
+
+
