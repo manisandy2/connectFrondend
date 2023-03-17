@@ -5,12 +5,12 @@ import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Typography } from "@mui/material";
 
-function StatusManagement() {
+function Status() {
   const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
     const { data } = await Axios.get(
-      "http://127.0.0.1:8000/api/statusManagement"
+      "http://127.0.0.1:8000/api/statusManagementGet"
     );
 
     const products = data.results;
@@ -67,4 +67,4 @@ function StatusManagement() {
   );
 }
 
-export default StatusManagement;
+export default Status;

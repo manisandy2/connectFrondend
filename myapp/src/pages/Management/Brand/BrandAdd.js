@@ -14,21 +14,25 @@ import {
 
 function BrandAdd() {
   const [name, setName] = useState("");
-  const [products, setProducts] = useState([]);
-  const [productName, setProductName] = useState("");
+  const [status, setStatus] = useState([]);
+  const [selectStatus, setSelectStatus] = useState([]);
 
   let { id } = useParams();
 
+  const navigate = useNavigate();
+
   useEffect(() => {
-    const fetchData = async () => {
-      const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
-      const products = data.results;
-      setProducts(products);
-    };
-    fetchData();
+    getAllStatus();
   }, []);
 
-  const navigate = useNavigate();
+  // console.log(products)
+  const getAllStatus = async () => {
+    const { data } = await ApiService.getAllStatus();
+    const status = data.results;
+    setStatus(status);
+  };
+
+  const classData = { name: name, status: selectStatus };
 
   function title() {
     if (id) {
@@ -38,19 +42,50 @@ function BrandAdd() {
     }
   }
 
-  const productPost = (e) => {
+  // const productPost = (e) => {
+  //   e.preventDefault();
+  //   Axios.post("http://127.0.0.1:8000/api/brandPost/", {
+  //     name,
+  //     status: productName,
+  //   })
+  //     .then((res) => navigate("/Management/brand/"))
+  //     // .then((res) => console.log("posting data", res))
+  //     .catch((err) => console.log(err));
+  // };
+
+  // const handleChange = (e) => {
+  //   setProductName(e.target.value);
+  // };
+
+  useEffect(() => {
+    if (id) {
+      ApiService.getBrandId(id)
+        .then((res) => {
+          setName(res.data.name);
+          setSelectStatus(res.data.status);
+        })
+
+        .catch((e) => console.log(e));
+    }
+  }, []);
+
+  function saveBrand(e) {
     e.preventDefault();
-    Axios.post("http://127.0.0.1:8000/api/brandPost/", {
-      name,
-      status: productName,
-    })
-      .then((res) => navigate("/Management/brand/"))
-      // .then((res) => console.log("posting data", res))
-      .catch((err) => console.log(err));
-  };
+    if (brandData.name !== "" && brandData.status !== "") {
+      if (id) {
+        ApiService.updateBrand(id, brandData)
+          .then(navigate("/Management/class/"))
+          .catch((e) => console.log(e));
+      } else {
+        ApiService.saveBrand(brandData)
+          .then(navigate("/Management/class/"))
+          .catch((e) => console.log(e));
+      }
+    } else alert("Please Enter the Value");
+  }
 
   const handleChange = (e) => {
-    setProductName(e.target.value);
+    setSelectStatus(e.target.value);
   };
 
   return (

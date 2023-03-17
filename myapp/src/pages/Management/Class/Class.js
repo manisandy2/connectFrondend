@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from "react";
-// import Axios from "axios";
 import "./Styles/class.css";
 import { Link } from "react-router-dom";
-// import Box from "@mui/material/Box";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
-import { Container } from "@mui/system";
+import { Container, Box } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import ApiService from "../../../service/ApiService";
-import { Alert, Typography } from "@mui/material";
+import { Typography } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 export default function Class() {
   const [classArray, setclassArray] = useState([]);
@@ -20,10 +19,18 @@ export default function Class() {
 
   const getAllClass = async () => {
     const { data } = await ApiService.getAllClass();
-
+    // console.log(JSON.stringify(data))
     const classArray = data.results;
     setclassArray(classArray);
   };
+
+  console.log(ApiService.postClassAddLink)
+
+  const rows = classArray.map((row) => ({
+    id: row.id,
+    Name: row.name,
+    Status: row.status.name,
+  }));
 
   function deleteClass(e, id) {
     e.preventDefault();
@@ -34,11 +41,44 @@ export default function Class() {
     }
   }
 
-  console.log(ApiService.postClassAddLink)
+  const columns = [
+    { field: "id", headerName: "id", width: 100 },
+    { field: "Name", headerName: "Name", width: 750 },
+    { field: "Status", headerName: "Status", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 150,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div style={{ cursor: "pointer" }}>
+            <Link to={"/Management/add/Class/" + params.row.id}>
+              <span>
+                <FaIcons.FaEdit />
+              </span>
+            </Link>
+            <span>
+              <a
+                onClick={(e) => {
+                  deleteClass(e, params.row.id);
+                }}
+              >
+                <AiIcons.AiFillDelete />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
+  ];
+
+  console.log(classArray);
 
   return (
-    <Container>
-      <div>
+    <Container sx={{  height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke"  }}>
         <Typography
           variant="h3"
           textAlign={"center"}
@@ -47,48 +87,26 @@ export default function Class() {
         >
           Class Management
         </Typography>
-        <Container sx={{ textAlign: "end" }}>
-          <Link to={<ApiService.postClassAddLink/>}>
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Container>
+      </Container>
 
-        <table>
-          <thead>
-            <th>S No</th>
-            <th>Name</th>
-            <th>Status</th>
-            <th>Actions</th>
-          </thead>
-          <tbody>
-            {classArray.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.status.name}</td>
-                <td>
-                  <Link to={"/Management/add/Class/" + product.id}>
-                    <span>
-                      <FaIcons.FaEdit />
-                    </span>
-                  </Link>
-                  <span>
-                    <a
-                      onClick={(e) => {
-                        deleteClass(e, product.id);
-                      }}
-                    >
-                      <AiIcons.AiFillDelete />
-                    </a>
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table>
-      </div>
+      <Container sx={{ textAlign: "end"}}>
+        <Link to="/Management/add/Class">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
+      <Container sx={{ textAlign: "end"  }}>
+        <div style={{ width: "100%" }}>
+          <div style={{  width: "100%" ,height:"550px"}}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              slots={{ toolbar: GridToolbar }}
+            />
+          </div>
+        </div>
+      </Container>
     </Container>
   );
 }

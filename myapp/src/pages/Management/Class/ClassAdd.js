@@ -1,6 +1,5 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
-// import "./Styles/classadd.css";
 import { useNavigate, useParams } from "react-router-dom";
 import {
   Container,
@@ -15,22 +14,14 @@ import ApiService from "../../../service/ApiService";
 
 function ClassAdd() {
   const [name, setName] = useState("");
-  const [products, setProducts] = useState([]);
-  const [productName, setProductName] = useState("");
-
+  const [status, setStatus] = useState([]);
+  const [selectStatus, setSelectStatus] = useState([]);
+  
   let { id } = useParams();
 
   console.log(id);
 
   const navigate = useNavigate();
-  // useEffect(() => {
-  //   const fetchData = async () => {
-  //     const { data } = await Axios.get(`http://127.0.0.1:8000/api/status`);
-  //     const products = data.results;
-  //     setProducts(products);
-  //   };
-  //   fetchData();
-  // }, []);
 
   useEffect(() => {
     getAllStatus();
@@ -39,11 +30,11 @@ function ClassAdd() {
   // console.log(products)
   const getAllStatus = async () => {
     const { data } = await ApiService.getAllStatus();
-    const products = data.results;
-    setProducts(products);
+    const status = data.results;
+    setStatus(status);
   };
 
-  const classData = { name: name, status: productName };
+  const classData = { name: name, status: selectStatus };
 
   // console.log(classData);
 
@@ -60,7 +51,7 @@ function ClassAdd() {
       ApiService.getClassById(id)
         .then((res) => {
           setName(res.data.name);
-          setProductName(res.data.status);
+          setSelectStatus(res.data.status);
         })
 
         .catch((e) => console.log(e));
@@ -83,12 +74,14 @@ function ClassAdd() {
   }
 
   const handleChange = (e) => {
-    setProductName(e.target.value);
+    setSelectStatus(e.target.value);
   };
 
   return (
     <div>
-      <Container sx={{ width: 300, height: 300 }}>
+      <Container
+        sx={{ width: 300, height: 400, backgroundColor: "whitesmoke" }}
+      >
         <Typography padding={3} variant="h5" textAlign={"center"}>
           {title()}
         </Typography>
@@ -101,10 +94,10 @@ function ClassAdd() {
           />
 
           <br />
-          <Select label="Status" value={productName} onChange={handleChange}>
-            {products.map((product, index) => (
-              <MenuItem value={product.id} key={index}>
-                {product.name}
+          <Select label="Status" value={selectStatus} onChange={handleChange}>
+            {status.map((statu, index) => (
+              <MenuItem value={statu.id} key={index}>
+                {statu.name}
               </MenuItem>
             ))}
           </Select>

@@ -21,7 +21,9 @@ import VendorAdd from "./pages/Management/Vendor/VendorAdd";
 
 
 import BrandType from "./pages/Types/Brand/BrandType"
+import BrandTypeAdd from "./pages/Types/Brand/BrandTypeAdd"
 import LightType from "./pages/Types/Light/LightType";
+import LightTypeAdd from "./pages/Types/Light/LightTypeAdd";
 
 
 
@@ -37,7 +39,7 @@ import LoginPage from "./pages/LoginPage";
 
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
-import StatusManagement from "./pages/Management/Status/Status";
+import Status from "./pages/Management/Status/Status";
 
 
 // import LogoutPage from './pages/LogoutPage';
@@ -58,19 +60,24 @@ function App() {
 
           <Route path="/Management/Class" element={<Class />} />
           <Route path="/Management/Brand" element={<Brand/>} /> 
-          <Route path="/Management/BrandLocation" element={<BrandLocation/>} /> 
+          <Route path="/Management/BrandLocation" element={<BrandLocation/>} />
+
           <Route path="/Management/Material" element={<Material/>} /> 
           <Route path="/Management/Vendor" element={<Vendor/>} /> 
-          <Route path="/Management/Status" element={<StatusManagement/>} /> 
+          <Route path="/Management/Status" element={<Status/>} /> 
 
           <Route path="/Management/add/Class" element={<ClassAdd/>} /> 
-          <Route path="/Management/add/Class/:id" element={<ClassAdd/>} /> 
+          <Route path="/Management/add/Class/:id" element={<ClassAdd/>} />
+
           <Route path="/Management/add/Brand" element={<BrandAdd/>} />
           <Route path="/Management/add/Brand/:id" element={<BrandAdd/>} />
+
           <Route path="/Management/add/BrandLocation" element={<BrandLocationAdd />} /> 
           <Route path="/Management/add/BrandLocation/:id" element={<BrandLocationAdd />} /> 
+
           <Route path="/Management/add/Material" element={<MaterialAdd/>} /> 
-          <Route path="/Management/add/Material/:id" element={<MaterialAdd/>} /> 
+          <Route path="/Management/add/Material/:id" element={<MaterialAdd/>} />
+
           <Route path="/Management/add/Vendor" element={<VendorAdd/>} /> 
           <Route path="/Management/add/Vendor/:id" element={<VendorAdd/>} /> 
 
@@ -85,7 +92,13 @@ function App() {
           ########################### Types ##################################### 
    
           <Route path="/Types/Brand/BrandType" element={<BrandType />} />  
-          <Route path="/Types/Light/LightType" element={<LightType/>} />  
+          <Route path="/Types/Light/LightType" element={<LightType/>} /> 
+
+          <Route path="/Types/add/BrandType" element={<BrandTypeAdd />} />  
+          <Route path="/Types/add/BrandType/:id" element={<BrandTypeAdd />} />  
+
+          <Route path="/Types/add/LightType" element={<LightTypeAdd/>} /> 
+          <Route path="/Types/add/LightType/:id" element={<LightTypeAdd/>} /> 
       </Routes>
     </div>
   );

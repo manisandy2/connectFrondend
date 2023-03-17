@@ -8,6 +8,7 @@ import ApiService from "../../../service/ApiService";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Link } from "react-router-dom";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 function Material() {
   const [materialArray, setMaterialArray] = useState([]);
@@ -31,6 +32,48 @@ function Material() {
         .catch((e) => console.log(e));
     }
   }
+
+  const rows = materialArray.map((row) => ({
+    id: row.id,
+    Name: row.name,
+    Status: row.status.name,
+    
+  }));
+
+  const columns = [
+    { field: "id", headerName: "id", width: 100 },
+    { field: "Name", headerName: "Name", width: 750 },
+    { field: "Status", headerName: "Status", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 150,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div style={{ cursor: "pointer" }}>
+            <Link to={"/Management/add/Material/" + params.row.id}>
+              <span>
+                <FaIcons.FaEdit />
+              </span>
+            </Link>
+            <span>
+              <a
+                onClick={(e) => {
+                  deleteMaterial(e, params.row.id);
+                }}
+              >
+                <AiIcons.AiFillDelete />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
+  ];
+
+
   return (
     <Container>
       <div>
@@ -50,7 +93,17 @@ function Material() {
           </Link>
         </Container>
 
-        <table>
+        <div style={{ width: "100%" }}>
+        <div style={{ height: 350, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            slots={{ toolbar: GridToolbar }}
+          />
+        </div>
+      </div>
+
+        {/* <table>
           <thead>
             <tr>
               <th>S No</th>
@@ -78,7 +131,7 @@ function Material() {
               </tr>
             ))}
           </tbody>
-        </table>
+        </table> */}
       </div>
     </Container>
   );

@@ -1,22 +1,77 @@
 import Axios from "axios";
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
 import { Container } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
 import { Typography } from "@mui/material";
+import ApiService from "../../../service/ApiService";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 function BrandType() {
-  const [products, setProducts] = useState([]);
-  const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/brandType");
-    const products = data.results;
-    setProducts(products);
-    console.log(products);
-  };
+  const [brandTypeArray, setBrandTypeArray] = useState([]);
 
   useEffect(() => {
-    fetchProducts();
+    getAllBrandType();
   }, []);
+
+  const getAllBrandType = async () => {
+    const { data } = await ApiService.getAllBrandType();
+
+    const brandTypeArray = data.results;
+    setBrandTypeArray(brandTypeArray);
+  };
+
+  function deleteBrandType(e, id) {
+    e.preventDefault();
+    if (window.confirm("Are you sure you want to delete this Class")) {
+      ApiService.deleteBrandType(id)
+        .then(getAllBrandType())
+        .catch((e) => console.log(e));
+    }
+  }
+
+  const rows = brandTypeArray.map((row) => ({
+    id: row.id,
+    Name: row.name,
+    Status: row.status.name,
+    
+  }));
+
+  const columns = [
+    { field: "id", headerName: "id", width: 100 },
+    { field: "Name", headerName: "Name", width: 750 },
+    { field: "Status", headerName: "Status", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 150,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div style={{ cursor: "pointer" }}>
+            <Link to={"/Management/add/Class/" + params.row.id}>
+              <span>
+                <FaIcons.FaEdit />
+              </span>
+            </Link>
+            <span>
+              <a
+                onClick={(e) => {
+                  deleteBrandType(e, params.row.id);
+                }}
+              >
+                <AiIcons.AiFillDelete />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <Container>
@@ -30,7 +85,23 @@ function BrandType() {
         >
           Brand Type
         </Typography>
-      <table>
+        <Container sx={{ textAlign: "end" }}>
+          <Link to="/Types/add/BrandType">
+            <Fab color="primary" aria-label="add">
+              <AddIcon />
+            </Fab>
+          </Link>
+        </Container>
+        <div style={{ width: "100%" }}>
+        <div style={{ height: 350, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            slots={{ toolbar: GridToolbar }}
+          />
+        </div>
+      </div>
+      {/* <table>
         <thead>
           <tr>
             <td>S no</td>
@@ -40,19 +111,31 @@ function BrandType() {
           </tr>
         </thead>
         <tbody>
-          {products.map((product) => (
+          {brandTypeArray.map((product) => (
             <tr key={product.id}>
               <td>{product.id}</td>
               <td>{product.name}</td>
               <td>{product.status.name}</td>
               <td>
-                <span><FaIcons.FaEdit /></span>
-                <span><AiIcons.AiFillDelete /></span>
+              <Link to={"/Types/add/BrandType" + product.id}>
+                    <span>
+                      <FaIcons.FaEdit />
+                    </span>
+                  </Link>
+                  <span>
+                    <a
+                      onClick={(e) => {
+                        deleteBrandType(e, product.id);
+                      }}
+                    >
+                      <AiIcons.AiFillDelete />
+                    </a>
+                  </span>
               </td>
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </div>
     </Container>
   );

@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const BASE_URL = "http://127.0.0.1:8000/api/";
-
+const class_redirect = "/Management/add/Class/"
 class ApiService {
   ////////////////////////////*** Status ***///////////////////////////////////
   getAllStatus() {
@@ -23,8 +23,9 @@ class ApiService {
   deleteClass(id) {
     return axios.delete(BASE_URL + "classGet/" + id);
   }
-  postClassAddLink(){
-    return "sdfsf"
+  const postClassAddLink = () => {
+    let name = "/Management/add/Class/" 
+    return BASE_URL
   }
   ////////////////////////////*** Brand ***///////////////////////////////////
   getAllBrand() {
@@ -93,6 +94,38 @@ class ApiService {
   deleteVendor(id) {
     return axios.delete(BASE_URL + "vendorGet/" + id);
   }
+  ////////////////////////////*** BrandType ***///////////////////////////////////
+  getAllBrandType() {
+    return axios.get(BASE_URL + "brandTypeGet");
+  }
+  saveBrandType(BrandTypeData) {
+    return axios.post(BASE_URL + "brandTypePost", BrandTypeData);
+  }
+  updateBrandType(id, BrandTypeData) {
+    return axios.put(`${BASE_URL + "brandTypeGet"}/ ${id}`, BrandTypeData);
+  }
+  getBrandTypeId(id) {
+    return axios.get(`${BASE_URL + "brandTypeGet"}/${id}`);
+  }
+  deleteBrandType(id) {
+    return axios.delete(BASE_URL + "brandTypeGet/" + id);
+  }
+    ////////////////////////////*** LightType ***///////////////////////////////////
+    getAllLightType() {
+      return axios.get(BASE_URL + "lightTypeGet");
+    }
+    saveLightType(LightTypeData) {
+      return axios.post(BASE_URL + "lightTypePost", LightTypeData);
+    }
+    updateLightType(id, LightTypeData) {
+      return axios.put(`${BASE_URL + "lightTypeGet"}/ ${id}`, LightTypeData);
+    }
+    getLightTypeId(id) {
+      return axios.get(`${BASE_URL + "lightTypeGet"}/${id}`);
+    }
+    deleteLightType(id) {
+      return axios.delete(BASE_URL + "lightTypeGet/" + id);
+    }
 }
 
 export default new ApiService();

@@ -7,10 +7,10 @@ import { Link } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import ApiService from "../../../service/ApiService";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 function BrandLocation() {
-
-  const [brandLocationArray,setbrandLocationArray] = useState([]);
+  const [brandLocationArray, setbrandLocationArray] = useState([]);
 
   useEffect(() => {
     getAllBrandLocation();
@@ -22,7 +22,7 @@ function BrandLocation() {
     setbrandLocationArray(brandLocationArray);
   };
 
-  function deleteClass(e, id) {
+  function deleteBrandLocation(e, id) {
     e.preventDefault();
     if (window.confirm("Are you sure you want to delete this Class")) {
       ApiService.deleteBrandLocation(id)
@@ -30,6 +30,47 @@ function BrandLocation() {
         .catch((e) => console.log(e));
     }
   }
+
+  const rows = brandLocationArray.map((row) => ({
+    id: row.id,
+    Name: row.name,
+    Status: row.status.name,
+    
+  }));
+
+
+  const columns = [
+    { field: "id", headerName: "id", width: 100 },
+    { field: "Name", headerName: "Name", width: 750 },
+    { field: "Status", headerName: "Status", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 150,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div style={{ cursor: "pointer" }}>
+            <Link to={"/Management/add/BrandLocation/" + params.row.id}>
+              <span>
+                <FaIcons.FaEdit />
+              </span>
+            </Link>
+            <span>
+              <a
+                onClick={(e) => {
+                  deleteBrandLocation(e, params.row.id);
+                }}
+              >
+                <AiIcons.AiFillDelete />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
+  ];
 
   return (
     <Container>
@@ -49,8 +90,17 @@ function BrandLocation() {
           </Fab>
         </Link>
       </Container>
+      <div style={{ width: "100%" }}>
+        <div style={{ height: 350, width: "100%" }}>
+          <DataGrid
+            rows={rows}
+            columns={columns}
+            slots={{ toolbar: GridToolbar }}
+          />
+        </div>
+      </div>
 
-      <table>
+      {/* <table>
         <thead>
           <tr>
             <td>S No</td>
@@ -67,7 +117,7 @@ function BrandLocation() {
               <td>{product.status.name}</td>
               <td>
                 <span>
-                <Link to={"/Management/add/BrandLocation/" + product.id}>
+                  <Link to={"/Management/add/BrandLocation/" + product.id}>
                     <span>
                       <FaIcons.FaEdit />
                     </span>
@@ -80,7 +130,7 @@ function BrandLocation() {
             </tr>
           ))}
         </tbody>
-      </table>
+      </table> */}
     </Container>
   );
 }

@@ -42,9 +42,9 @@ function VendorAdd() {
 
   function title() {
     if (id) {
-      return "Updata Material";
+      return "Updata Vendor";
     } else {
-      return "Add Material";
+      return "Add Vendor";
     }
   }
 
