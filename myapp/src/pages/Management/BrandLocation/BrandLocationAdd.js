@@ -35,7 +35,7 @@ function BrandLocationAdd() {
     setProducts(products);
   };
 
-  const classData = { name: name, status: productName };
+  const brandLocationData = { name: name, status: productName };
 
   // console.log(classData);
 
@@ -59,15 +59,15 @@ function BrandLocationAdd() {
     }
   }, []);
 
-  function saveClass(e) {
+  function savebrandLocation(e) {
     e.preventDefault();
-    if (classData.name !== "" && classData.status !== "") {
+    if (brandLocationData.name !== "" && brandLocationData.status !== "") {
       if (id) {
-        ApiService.updateBrandLocation(id, classData)
+        ApiService.updateBrandLocation(id, brandLocationData)
           .then(navigate("/Management/BrandLocation/"))
           .catch((e) => console.log(e));
       } else {
-        ApiService.saveClass(classData)
+        ApiService.saveBrandLocation(brandLocationData)
           .then(navigate("/Management/BrandLocation/"))
           .catch((e) => console.log(e));
       }
@@ -102,7 +102,7 @@ function BrandLocationAdd() {
             ))}
           </Select>
           <br />
-          <Button variant="contained" onClick={(e) => saveClass(e)}>
+          <Button variant="contained" onClick={(e) => savebrandLocation(e)}>
             Click
           </Button>
           <br />

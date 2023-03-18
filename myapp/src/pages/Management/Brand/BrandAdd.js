@@ -11,6 +11,7 @@ import {
   Button,
   Typography,
 } from "@mui/material";
+import ApiService from "../../../service/ApiService";
 
 function BrandAdd() {
   const [name, setName] = useState("");
@@ -32,7 +33,7 @@ function BrandAdd() {
     setStatus(status);
   };
 
-  const classData = { name: name, status: selectStatus };
+  const brandData = { name: name, status: selectStatus };
 
   function title() {
     if (id) {
@@ -42,20 +43,6 @@ function BrandAdd() {
     }
   }
 
-  // const productPost = (e) => {
-  //   e.preventDefault();
-  //   Axios.post("http://127.0.0.1:8000/api/brandPost/", {
-  //     name,
-  //     status: productName,
-  //   })
-  //     .then((res) => navigate("/Management/brand/"))
-  //     // .then((res) => console.log("posting data", res))
-  //     .catch((err) => console.log(err));
-  // };
-
-  // const handleChange = (e) => {
-  //   setProductName(e.target.value);
-  // };
 
   useEffect(() => {
     if (id) {
@@ -74,11 +61,11 @@ function BrandAdd() {
     if (brandData.name !== "" && brandData.status !== "") {
       if (id) {
         ApiService.updateBrand(id, brandData)
-          .then(navigate("/Management/class/"))
+          .then(navigate("/Management/Brand/"))
           .catch((e) => console.log(e));
       } else {
         ApiService.saveBrand(brandData)
-          .then(navigate("/Management/class/"))
+          .then(navigate("/Management/Brand/"))
           .catch((e) => console.log(e));
       }
     } else alert("Please Enter the Value");
@@ -103,15 +90,15 @@ function BrandAdd() {
           onChange={(e) => setName(e.target.value)}
         />
         <br/>
-        <Select label="Status" value={productName} onChange={handleChange}>
-          {products.map((product, index) => (
-            <MenuItem value={product.id} key={index}>
-              {product.name}
+        <Select label="Status" value={selectStatus} onChange={handleChange}>
+          {status.map((statu, index) => (
+            <MenuItem value={statu.id} key={index}>
+              {statu.name}
             </MenuItem>
           ))}
         </Select>
             <br/>
-        <Button variant="contained" onClick={productPost}>
+        <Button variant="contained" onClick={(e) => saveBrand(e)}>
           Click
         </Button>
         <br />

@@ -50,7 +50,7 @@ function VendorAdd() {
 
   useEffect(() => {
     if (id) {
-      ApiService.getMaterialId(id)
+      ApiService.getVendorId(id)
         .then((res) => {
           setName(res.data.name);
           setProductName(res.data.status);
@@ -64,12 +64,12 @@ function VendorAdd() {
     e.preventDefault();
     if (classData.name !== "" && classData.status !== "") {
       if (id) {
-        ApiService.updateMaterial(id, classData)
-          .then(navigate("/Management/Material"))
+        ApiService.updateVendor(id, classData)
+          .then(navigate("/Management/Vendor"))
           .catch((e) => console.log(e));
       } else {
-        ApiService.saveMaterial(classData)
-          .then(navigate("/Management/Material"))
+        ApiService.saveVendor(classData)
+          .then(navigate("/Management/Vendor"))
           .catch((e) => console.log(e));
       }
     } else alert("Please Enter the Value");
@@ -108,7 +108,7 @@ function VendorAdd() {
           <br />
           <Button
             variant="contained"
-            onClick={() => navigate("/Management/Material")}
+            onClick={() => navigate("/Management/Vendor")}
           >
             Back
           </Button>

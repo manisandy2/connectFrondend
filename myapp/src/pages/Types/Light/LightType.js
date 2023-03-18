@@ -98,41 +98,7 @@ function LightType() {
             />
           </div>
         </div>
-        {/* <table>
-          <thead>
-            <tr>
-              <td>S no</td>
-              <td>Name</td>
-              <td>Status</td>
-              <td>Edit</td>
-            </tr>
-          </thead>
-          <tbody>
-            {lightTypeArray.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.status.name}</td>
-                <td>
-                <Link to={"/Types/add/LightType" + product.id}>
-                    <span>
-                      <FaIcons.FaEdit />
-                    </span>
-                  </Link>
-                  <span>
-                    <a
-                      onClick={(e) => {
-                        deleteLightType(e, product.id);
-                      }}
-                    >
-                      <AiIcons.AiFillDelete />
-                    </a>
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
+        
       </div>
     </Container>
   );

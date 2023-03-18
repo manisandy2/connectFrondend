@@ -23,7 +23,7 @@ class ApiService {
   deleteClass(id) {
     return axios.delete(BASE_URL + "classGet/" + id);
   }
-  const postClassAddLink = () => {
+  postClassAddLink()  {
     let name = "/Management/add/Class/" 
     return BASE_URL
   }
@@ -35,7 +35,7 @@ class ApiService {
     return axios.post(BASE_URL + "brandPost", brandData);
   }
   updateBrand(id, brandData) {
-    return axios.put(`${BASE_URL + "brandGet"}/ ${id}`, brandData);
+    return axios.put(`${BASE_URL + "brandGet"}/${id}`, brandData);
   }
   getBrandId(id) {
     return axios.get(`${BASE_URL + "brandGet"}/${id}`);
@@ -48,11 +48,11 @@ class ApiService {
     return axios.get(BASE_URL + "brandLocationGet");
   }
   saveBrandLocation(brandLocationData) {
-    return axios.post(BASE_URL + "brandPost", brandLocationData);
+    return axios.post(BASE_URL + "brandLocationPost", brandLocationData);
   }
   updateBrandLocation(id, brandLocationData) {
     return axios.put(
-      `${BASE_URL + "brandLocationGet"}/ ${id}`,
+      `${BASE_URL + "brandLocationGet"}/${id}`,
       brandLocationData
     );
   }
@@ -70,7 +70,7 @@ class ApiService {
     return axios.post(BASE_URL + "materialPost", materialData);
   }
   updateMaterial(id, materialData) {
-    return axios.put(`${BASE_URL + "materialGet"}/ ${id}`, materialData);
+    return axios.put(`${BASE_URL + "materialGet"}/${id}`, materialData);
   }
   getMaterialId(id) {
     return axios.get(`${BASE_URL + "materialGet"}/${id}`);
@@ -86,7 +86,7 @@ class ApiService {
     return axios.post(BASE_URL + "vendorPost", vendorData);
   }
   updateVendor(id, vendorData) {
-    return axios.put(`${BASE_URL + "vendorGet"}/ ${id}`, vendorData);
+    return axios.put(`${BASE_URL + "vendorGet"}/${id}`, vendorData);
   }
   getVendorId(id) {
     return axios.get(`${BASE_URL + "vendorGet"}/${id}`);
@@ -102,7 +102,7 @@ class ApiService {
     return axios.post(BASE_URL + "brandTypePost", BrandTypeData);
   }
   updateBrandType(id, BrandTypeData) {
-    return axios.put(`${BASE_URL + "brandTypeGet"}/ ${id}`, BrandTypeData);
+    return axios.put(`${BASE_URL + "brandTypeGet"}/${id}`, BrandTypeData);
   }
   getBrandTypeId(id) {
     return axios.get(`${BASE_URL + "brandTypeGet"}/${id}`);
@@ -118,7 +118,7 @@ class ApiService {
       return axios.post(BASE_URL + "lightTypePost", LightTypeData);
     }
     updateLightType(id, LightTypeData) {
-      return axios.put(`${BASE_URL + "lightTypeGet"}/ ${id}`, LightTypeData);
+      return axios.put(`${BASE_URL + "lightTypeGet"}/${id}`, LightTypeData);
     }
     getLightTypeId(id) {
       return axios.get(`${BASE_URL + "lightTypeGet"}/${id}`);

@@ -53,7 +53,7 @@ function BrandType() {
       renderCell: (params) => {
         return (
           <div style={{ cursor: "pointer" }}>
-            <Link to={"/Management/add/Class/" + params.row.id}>
+            <Link to={"/Types/add/BrandType/" + params.row.id}>
               <span>
                 <FaIcons.FaEdit />
               </span>
@@ -101,41 +101,7 @@ function BrandType() {
           />
         </div>
       </div>
-      {/* <table>
-        <thead>
-          <tr>
-            <td>S no</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Edit</td>
-          </tr>
-        </thead>
-        <tbody>
-          {brandTypeArray.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.status.name}</td>
-              <td>
-              <Link to={"/Types/add/BrandType" + product.id}>
-                    <span>
-                      <FaIcons.FaEdit />
-                    </span>
-                  </Link>
-                  <span>
-                    <a
-                      onClick={(e) => {
-                        deleteBrandType(e, product.id);
-                      }}
-                    >
-                      <AiIcons.AiFillDelete />
-                    </a>
-                  </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
+      
     </div>
     </Container>
   );

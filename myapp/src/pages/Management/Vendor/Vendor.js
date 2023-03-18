@@ -52,7 +52,7 @@ function Vendor() {
       renderCell: (params) => {
         return (
           <div style={{ cursor: "pointer" }}>
-            <Link to={"/Management/add/Class/" + params.row.id}>
+            <Link to={"/Management/add/Vendor/" + params.row.id}>
               <span>
                 <FaIcons.FaEdit />
               </span>
@@ -99,33 +99,7 @@ function Vendor() {
           />
         </div>
       </div>
-        {/* <table>
-          <thead>
-            <tr>
-              <td>S no</td>
-              <td>Name</td>
-              <td>Status</td>
-              <td>Edit</td>
-            </tr>
-          </thead>
-          <tbody>
-            {vendorArray.map((product) => (
-              <tr key={product.id}>
-                <td>{product.id}</td>
-                <td>{product.name}</td>
-                <td>{product.status.name}</td>
-                <td>
-                  <span>
-                    <FaIcons.FaEdit />
-                  </span>
-                  <span>
-                    <AiIcons.AiFillDelete />
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
+        
       </div>
     </Container>
   );

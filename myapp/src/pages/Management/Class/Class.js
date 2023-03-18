@@ -24,7 +24,7 @@ export default function Class() {
     setclassArray(classArray);
   };
 
-  console.log(ApiService.postClassAddLink)
+  // console.log(ApiService.postClassAddLin k)
 
   const rows = classArray.map((row) => ({
     id: row.id,

@@ -5,7 +5,7 @@ function Asset() {
     const [products, setProducts] = useState([]);
 
   const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/asset/");
+    const { data } = await Axios.get("http://127.0.0.1:8000/api/assetGet");
 
     const products = data.results;
     setProducts(products);

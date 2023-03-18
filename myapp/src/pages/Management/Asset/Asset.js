@@ -20,7 +20,7 @@ function Asset() {
     <div className="container-box">
       <h2>Asset</h2>
       <div className="createButton">
-        <Link className="linkbutton" to="/Management/add/asset"> + Brand </Link>
+        <Link className="linkbutton" to="/OutletMedia/add/Asset"> + Brand </Link>
       </div>
       <table>
         <thead>
@@ -47,7 +47,7 @@ function Asset() {
             <tr key={product.id}>
               <td> {product.id}</td>
               <td> {product.Location.name}</td>
-              <td> {product.BrandingType.name}</td>
+              {/* <td> {product.BrandingType.name}</td>
               <td> {product.BrandLocation.name}</td>
               <td> {product.Brand.name}</td>
               <td> {product.ModelName}</td>
@@ -56,7 +56,7 @@ function Asset() {
               <td> {product.Material.name}</td>
               <td> {product.Location.Region.name}</td>
               <td> {product.ADImage}</td>
-              <td> {product.Status.name}</td>
+              <td> {product.Status.name}</td> */}
               <td> Edit</td>
             </tr>
           ))}
