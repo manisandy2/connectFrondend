@@ -1,21 +1,29 @@
-import React, { useState } from 'react'
+import React, { useState,useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 
 function HomePage() {
-  const [but,setBut] = useState(0)
+  const navigate = useNavigate();
+  const [authenticated, setauthenticated] = useState(null);
+  
+  useEffect(() => {
+    // const loggedInUser = localStorage.getItem("user");
+    const loggedInUser = localStorage.getItem("user");
 
-  const buttonClick = () => {
-    setBut(but+1)
-  }
-  // The user is <b>{isLoggedIn ? 'currently' : 'not'}</b> logged in.
-  return (
-    <div>
+    if (loggedInUser) {
+      setauthenticated(loggedInUser);
+    }
+  }, []);
+  
+
+
+  if (!authenticated) {
+    return navigate("/login");
+  } else
+    return (
+      <div>
         <p>You are logged to home page!</p>
-        {/* <p>{but}</p>
-        <button >Submit</button>
-         */}
-    </div>
-  )
+      </div>
+    );
 }
 
-export default HomePage
-
+export default HomePage;

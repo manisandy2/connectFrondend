@@ -1,10 +1,14 @@
-import React, { useEffect, useRef, useState } from "react";
+import { Button } from "@mui/material";
+import { Container } from "@mui/system";
+import React, { useEffect, useState } from "react";
 import * as AiIcons from "react-icons/ai";
 import * as FaIcons from "react-icons/fa";
 import { Link } from "react-router-dom";
 import styled from "styled-components";
 import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
+// import { useNavigate } from "react-router-dom";
+import LogoutPage from "../pages/LogoutPage";
 
 const Nav = styled.div`
   background: #15171c;
@@ -42,8 +46,21 @@ const SidebarWrap = styled.div`
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
+  const [user,setUser] = useState(null)
+  // const navigate = useNavigate();
 
   const showSidebar = () => setSidebar(!sidebar);
+
+
+  const getUser = () => {
+    const user = JSON.parse(localStorage.getItem("user"));
+    setUser(user)
+    console.log(user);
+  };
+
+  useEffect(()=> {
+    getUser();
+  },[])
 
 
   return (
@@ -52,6 +69,33 @@ const Sidebar = () => {
         <NavIcon to="#">
           <FaIcons.FaBars onClick={showSidebar} />
         </NavIcon>
+        <Container sx={{ textAlign: "right" }}>
+          <Link to={"/"}>
+            <Button variant="contained">Home</Button>
+          </Link>
+          {user === null ?  
+            <Link to={"/login"}>
+              <Button variant="contained">Login</Button>
+             </Link> : 
+          //    <Button variant="contained" onClick={logout}>
+          //     LogOut
+          //  </Button>
+             <Button variant="contained" onClick={LogoutPage}>
+              LogOut
+           </Button>
+
+          }
+
+           {/* <Link to={"/login"}>
+             <Button variant="contained">Login</Button>
+           </Link> */}
+
+           {/* <Button variant="contained" onClick={logout}>
+             LogOut
+           </Button>
+           */}
+
+        </Container>
       </Nav>
       <SidebarNav sidebar={sidebar}>
         <SidebarWrap>

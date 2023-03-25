@@ -54,7 +54,10 @@ function Asset() {
               <td> {product.Height}</td>
               <td> {product.Material.name}</td>
               <td> {product.Location.Region.name}</td>
-              <td> {product.ADImage}</td>
+              {/* <td> {product.ADImage}</td> */}
+              <td> <img src={product.ADImage} height="100" width="100"/>  
+              </td>
+              {/* <td> <img src={product.ADImage} width="500" height="600"> </img> </td> */}
               <td> {product.Status.name}</td>
               <td> Edit</td>
             </tr>

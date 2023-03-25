@@ -1,4 +1,4 @@
-import { Routes, Route } from "react-router-dom";
+import {  Routes, Route } from "react-router-dom";
 // import Navbar from "./components/Navbar";
 // import Sidebar from "./components/Sidebar";
 // import { SidebarData } from "./components/SidebarData";
@@ -40,6 +40,8 @@ import LoginPage from "./pages/LoginPage";
 import Product from "./pages/Product";
 import ProductList from "./pages/ProductList";
 import Status from "./pages/Management/Status/Status";
+import PrivateRoute from "./utils/PrivateRoute";
+// import PrivateRoute 
 
 
 // import LogoutPage from './pages/LogoutPage';
@@ -48,6 +50,7 @@ function App() {
   return (
     <div>
       <Routes>
+          {/* <PrivateRoute></PrivateRoute> */}
           <Route path="/" element={<HomePage />} />
           <Route path="/login" element={<LoginPage />} />
           <Route path="/dashboard" element={<Dashboard />} />
