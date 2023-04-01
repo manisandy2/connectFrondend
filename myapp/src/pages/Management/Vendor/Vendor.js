@@ -36,7 +36,6 @@ function Vendor() {
     id: row.id,
     Name: row.name,
     Status: row.status.name,
-    
   }));
 
   const columns = [
@@ -73,8 +72,8 @@ function Vendor() {
   ];
 
   return (
-    <Container>
-      <div>
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke" }}>
         <Typography
           variant="h3"
           textAlign={"center"}
@@ -83,23 +82,22 @@ function Vendor() {
         >
           Vendor Management
         </Typography>
-        <Container sx={{ textAlign: "end" }}>
-          <Link to="/Management/add/Vendor">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Container>
-        <div style={{ width: "100%" }}>
-        <div style={{ height: 350, width: "100%" }}>
+      </Container>
+      <Container sx={{ textAlign: "end" }}>
+        <Link to="/Management/add/Vendor">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
+      <div style={{ width: "100%" }}>
+        <div style={{ height: "650px", width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
             slots={{ toolbar: GridToolbar }}
           />
         </div>
-      </div>
-        
       </div>
     </Container>
   );

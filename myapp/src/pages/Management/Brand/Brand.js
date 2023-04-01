@@ -10,7 +10,6 @@ import * as AiIcons from "react-icons/ai";
 import ApiService from "../../../service/ApiService";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
-
 function Brand() {
   const [brandArray, setbrandArray] = useState([]);
 
@@ -38,7 +37,6 @@ function Brand() {
     id: row.id,
     Name: row.name,
     Status: row.status.name,
-    
   }));
 
   const columns = [
@@ -75,15 +73,17 @@ function Brand() {
   ];
 
   return (
-    <Container>
-      <Typography
-        variant="h3"
-        textAlign={"center"}
-        paddingTop={5}
-        paddingBottom={5}
-      >
-        Brand Management
-      </Typography>
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke" }}>
+        <Typography
+          variant="h3"
+          textAlign={"center"}
+          paddingTop={5}
+          paddingBottom={5}
+        >
+          Brand Management
+        </Typography>
+      </Container>
 
       <Container sx={{ textAlign: "end" }}>
         <Link to="/Management/add/Brand">
@@ -92,8 +92,8 @@ function Brand() {
           </Fab>
         </Link>
       </Container>
-      <div style={{ width: "100%" ,height:"100%" }}>
-        <div style={{ height: 350, width: "100%" }}>
+      <div style={{ width: "100%", height: "100%" }}>
+        <div style={{ height: "650px", width: "100%" }}>
           <DataGrid
             rowHeight={50}
             rows={rows}
@@ -102,42 +102,6 @@ function Brand() {
           />
         </div>
       </div>
-
-      {/* <table>
-        <thead>
-          <tr>
-            <td>S No</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Actions</td>
-          </tr>
-        </thead>
-        <tbody>
-          {brandArray.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.status.name}</td>
-              <td>
-                <Link to={"/Management/add/Brand/" + product.id}>
-                  <span>
-                    <FaIcons.FaEdit />
-                  </span>
-                </Link>
-                <span>
-                <a
-                      onClick={(e) => {
-                        deleteBrand(e, product.id);
-                      }}
-                    >
-                      <AiIcons.AiFillDelete />
-                    </a>
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </Container>
   );
 }

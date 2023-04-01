@@ -37,7 +37,6 @@ function Material() {
     id: row.id,
     Name: row.name,
     Status: row.status.name,
-    
   }));
 
   const columns = [
@@ -73,10 +72,9 @@ function Material() {
     },
   ];
 
-
   return (
-    <Container>
-      <div>
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke" }}>
         <Typography
           variant="h3"
           textAlign={"center"}
@@ -85,53 +83,23 @@ function Material() {
         >
           Material Management
         </Typography>
-        <Container sx={{ textAlign: "end" }}>
-          <Link to="/Management/add/Material">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Container>
+      </Container>
+      <Container sx={{ textAlign: "end" }}>
+        <Link to="/Management/add/Material">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
 
-        <div style={{ width: "100%" }}>
-        <div style={{ height: 350, width: "100%" }}>
+      <div style={{ width: "100%" }}>
+        <div style={{ height: 650, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
             slots={{ toolbar: GridToolbar }}
           />
         </div>
-      </div>
-
-        {/* <table>
-          <thead>
-            <tr>
-              <th>S No</th>
-              <th>Name</th>
-              <th>Status</th>
-              <th>Actions</th>
-            </tr>
-          </thead>
-          <tbody>
-            {materialArray.map((product) => (
-              <tr key={product.id}>
-                <td> {product.id}</td>
-                <td> {product.name}</td>
-                <td> {product.status.name}</td>
-                <td>
-                <Link to={"/Management/add/Material/" + product.id}>
-                    <span>
-                      <FaIcons.FaEdit />
-                    </span>
-                  </Link>
-                  <span>
-                    <AiIcons.AiFillDelete />
-                  </span>
-                </td>
-              </tr>
-            ))}
-          </tbody>
-        </table> */}
       </div>
     </Container>
   );

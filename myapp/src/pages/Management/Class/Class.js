@@ -43,7 +43,7 @@ export default function Class() {
 
   const columns = [
     { field: "id", headerName: "id", width: 100 },
-    { field: "Name", headerName: "Name", width: 750 },
+    { field: "Name", headerName: "Name", width: 450 },
     { field: "Status", headerName: "Status", width: 150 },
     {
       field: "actions",
@@ -98,7 +98,7 @@ export default function Class() {
       </Container>
       <Container sx={{ textAlign: "end"  }}>
         <div style={{ width: "100%" }}>
-          <div style={{  width: "100%" ,height:"550px"}}>
+          <div style={{  width: "100%" ,height:"650px"}}>
             <DataGrid
               rows={rows}
               columns={columns}

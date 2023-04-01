@@ -126,6 +126,21 @@ class ApiService {
     deleteLightType(id) {
       return axios.delete(BASE_URL + "lightTypeGet/" + id);
     }
-}
+    //////////////////////////////*** Asset ***///////////////////////////////////////
+    getAllAsset() {
+      return axios.get(BASE_URL + "assetGet");
+    }
+
+    //////////////////////////////*** statusManagementGet ***///////////////////////////////////////
+    getAllstatusManagementGet() {
+      return axios.get(BASE_URL + "statusManagementGet");
+    }
+
+     //////////////////////////////*** ShowRoom ***///////////////////////////////////////
+
+     getAllShowRoomGet() {
+      return axios.get(BASE_URL + "showroom");
+    }
+  }
 
 export default new ApiService();

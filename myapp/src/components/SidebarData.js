@@ -6,46 +6,22 @@ import * as IoIcons from "react-icons/io";
 
 export const SidebarData = [
   {
-    title: "Home",
+    title: "Dashboard",
     path: "/",
     icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
-      {
-        title: "Class",
-        path: "/class",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-      {
-        title: "MyClass",
-        path: "/myclass",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-    ],
   },
   {
-    title: "Dashboard",
-    path: "/dashboard/",
-    icon: <IoIcons.IoIosPaper />,
+    title: "Task Sharing System",
+    path: "/Task Sharing System",
+    icon: <AiIcons.AiFillHome />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
-      {
-        title: "Class",
-        path: "/dashboard/class",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-      {
-        title: "MYClass",
-        path: "/dashboard/myclass",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-    ],
   },
+
   {
     title: "Outlet Media",
-    path: "/OutletMedia",
     icon: <FaIcons.FaCartPlus />,
     iconClosed: <RiIcons.RiArrowDownSFill />,
     iconOpened: <RiIcons.RiArrowUpSFill />,
@@ -66,43 +42,10 @@ export const SidebarData = [
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "Showroom Details List",
+        title: "Showroom List",
         path: "/OutletMedia/Showroom",
         icon: <AiIcons.AiOutlineBank />,
       },
-      {
-        title: "Advertisement Location",
-        path: "/OutletMedia/class",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-    ],
-  },
-  {
-    title: "Type",
-    path: "/Type",
-    icon: <FaIcons.FaCartPlus />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
-      {
-        title: "Brand Type",
-        path: "/Types/Brand/BrandType",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-      {
-        title: "Light Type",
-        path: "/Types/Light/LightType",
-        icon: <AiIcons.AiOutlineBank />,
-      },
-    ],
-  },
-  {
-    title: "Management",
-    path: "/Management",
-    icon: <FaIcons.FaCartPlus />,
-    iconClosed: <RiIcons.RiArrowDownSFill />,
-    iconOpened: <RiIcons.RiArrowUpSFill />,
-    subNav: [
       {
         title: "Class",
         path: "/Management/Class",
@@ -114,18 +57,28 @@ export const SidebarData = [
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "Brand Location",
+        title: "Brand Type",
+        path: "/Types/Brand/BrandType",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Vendor List",
+        path: "/Management/Vendor",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Advertisement Location",
         path: "/Management/BrandLocation",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "Material",
+        title: "Material Type",
         path: "/Management/Material",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
-        title: "Vendor",
-        path: "/Management/Vendor",
+        title: "Light Type",
+        path: "/Types/Light/LightType",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
@@ -135,28 +88,110 @@ export const SidebarData = [
       },
     ],
   },
+
   {
-    title: "Asset Management",
+    title: "Hoarding",
+    path: "/Hoarding",
+    icon: <FaIcons.FaCartPlus />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: "Hoarding List",
+        path: "/Hoarding List",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+    ]
+  },
+  {
+    title: "Job Assign",
     path: "/AssetManagement",
     icon: <FaIcons.FaCartPlus />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: "Job List",
+        path: "/Job List",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Job For",
+        path: "/Job For",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Job Type",
+        path: "/Job type",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Design Type",
+        path: "/Design Type",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Quick View",
+        path: "/Quick View",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+    ]
   },
   {
-    title: "ShowRoom Details",
-    path: "/ShowroomDetails",
+    title: "User Management",
+    path: "/AssetManagement",
     icon: <FaIcons.FaCartPlus />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: "Admin Security",
+        path: "/Admin Security",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Users",
+        path: "/users",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Roles",
+        path: "/Roles",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "Role Management",
+        path: "/Role Management",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+    ]
   },
   {
-    title: "Team",
+    title: "Media Research",
     path: "/team",
     icon: <IoIcons.IoMdPeople />,
   },
   {
-    title: "Messages",
+    title: "Media Connect",
     path: "/messages",
     icon: <FaIcons.FaEnvelopeOpenText />,
+    iconClosed: <RiIcons.RiArrowDownSFill />,
+    iconOpened: <RiIcons.RiArrowUpSFill />,
+    subNav: [
+      {
+        title: "View Job",
+        path: "/View Job",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+      {
+        title: "View Rating",
+        path: "/View Rating",
+        icon: <AiIcons.AiOutlineBank />,
+      },
+    ]
   },
   {
-    title: "Support",
+    title: "Mobile App",
     path: "/support",
     icon: <IoIcons.IoMdHelpCircle />,
   },

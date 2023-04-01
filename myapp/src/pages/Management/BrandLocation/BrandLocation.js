@@ -35,9 +35,7 @@ function BrandLocation() {
     id: row.id,
     Name: row.name,
     Status: row.status.name,
-    
   }));
-
 
   const columns = [
     { field: "id", headerName: "id", width: 100 },
@@ -73,15 +71,17 @@ function BrandLocation() {
   ];
 
   return (
-    <Container>
-      <Typography
-        variant="h3"
-        textAlign={"center"}
-        paddingTop={5}
-        paddingBottom={5}
-      >
-        Brand Location
-      </Typography>
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke"  }}>
+        <Typography
+          variant="h3"
+          textAlign={"center"}
+          paddingTop={5}
+          paddingBottom={5}
+        >
+          Brand Location
+        </Typography>
+      </Container>
 
       <Container sx={{ textAlign: "end" }}>
         <Link to="/Management/add/BrandLocation">
@@ -91,7 +91,7 @@ function BrandLocation() {
         </Link>
       </Container>
       <div style={{ width: "100%" }}>
-        <div style={{ height: 350, width: "100%" }}>
+        <div style={{ height: 650, width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -99,38 +99,6 @@ function BrandLocation() {
           />
         </div>
       </div>
-
-      {/* <table>
-        <thead>
-          <tr>
-            <td>S No</td>
-            <td>Name</td>
-            <td>Status</td>
-            <td>Edit</td>
-          </tr>
-        </thead>
-        <tbody>
-          {brandLocationArray.map((product) => (
-            <tr key={product.id}>
-              <td>{product.id}</td>
-              <td>{product.name}</td>
-              <td>{product.status.name}</td>
-              <td>
-                <span>
-                  <Link to={"/Management/add/BrandLocation/" + product.id}>
-                    <span>
-                      <FaIcons.FaEdit />
-                    </span>
-                  </Link>
-                </span>
-                <span>
-                  <AiIcons.AiFillDelete />
-                </span>
-              </td>
-            </tr>
-          ))}
-        </tbody>
-      </table> */}
     </Container>
   );
 }

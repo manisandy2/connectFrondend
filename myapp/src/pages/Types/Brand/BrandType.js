@@ -37,7 +37,6 @@ function BrandType() {
     id: row.id,
     Name: row.name,
     Status: row.status.name,
-    
   }));
 
   const columns = [
@@ -74,10 +73,9 @@ function BrandType() {
   ];
 
   return (
-    <Container>
-    <div>
-      
-      <Typography
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke"  }}>
+        <Typography
           variant="h3"
           textAlign={"center"}
           paddingTop={5}
@@ -85,15 +83,16 @@ function BrandType() {
         >
           Brand Type
         </Typography>
-        <Container sx={{ textAlign: "end" }}>
-          <Link to="/Types/add/BrandType">
-            <Fab color="primary" aria-label="add">
-              <AddIcon />
-            </Fab>
-          </Link>
-        </Container>
-        <div style={{ width: "100%" }}>
-        <div style={{ height: 350, width: "100%" }}>
+      </Container>
+      <Container sx={{ textAlign: "end" }}>
+        <Link to="/Types/add/BrandType">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
+      <div style={{ width: "100%" }}>
+        <div style={{ height: "650px", width: "100%" }}>
           <DataGrid
             rows={rows}
             columns={columns}
@@ -101,8 +100,6 @@ function BrandType() {
           />
         </div>
       </div>
-      
-    </div>
     </Container>
   );
 }

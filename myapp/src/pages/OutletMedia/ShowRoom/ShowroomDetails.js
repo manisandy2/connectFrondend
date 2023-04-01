@@ -1,84 +1,120 @@
-import Axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import Fab from "@mui/material/Fab";
+import AddIcon from "@mui/icons-material/Add";
+import { Container, Box } from "@mui/system";
+import * as FaIcons from "react-icons/fa";
+import * as AiIcons from "react-icons/ai";
+import ApiService from "../../../service/ApiService";
+import { Typography } from "@mui/material";
+import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
 function ShowroomDetails() {
-  const [products, setProducts] = useState([]);
-  const fetchProducts = async () => {
-    const { data } = await Axios.get("http://127.0.0.1:8000/api/showroom/");
-    const products = data.results;
-    setProducts(products);
-    console.log(products);
-  };
+  const [showroom,setShowroom] = useState([])
 
   useEffect(() => {
-    fetchProducts();
+    getAllshowroom();
   }, []);
 
+
+ 
+  const getAllshowroom = async () => {
+    const { data } = await ApiService.getAllShowRoomGet();
+    const showroom = data.results;
+    setShowroom(showroom);
+  
+  };
+
+  const rows = showroom.map((row) => ({
+    id: row.id,
+    Name: row.name,
+    RSM: row.RSM === null ? "NA" : row.RSM.name ,
+    ASM: row.ASM === null ? "NA" : row.ASM.name ,
+    Manager: row.Manager == null ? "NA" : row.Manager.name,
+    CUG_NO: row.CUG_NO,
+    Landline: row.Landline,
+    E_Mail: row.E_Mail,
+    Region: row.Region === null ? "NA" : row.Region.name,
+    State: row.State === null ? "NA" : row.State.name,
+    Address: row.Address,
+   
+  }));
+
+  const columns = [
+    { field: "id", headerName: "id", width: 100 },
+    { field: "Name", headerName: "Name", width: 250 },
+    { field: "RSM", headerName: "RSM", width: 250 },
+    { field: "ASM", headerName: "ASM", width: 450 },
+    { field: "Manager", headerName: "Manager", width: 450 },
+    { field: "CUG_NO", headerName: "CUG_NO", width: 450 },
+    { field: "Landline", headerName: "Landline", width: 450 },
+    { field: "E_Mail", headerName: "E_Mail", width: 450 },
+    { field: "Region", headerName: "Region", width: 450 },
+    { field: "State", headerName: "State", width: 450 },
+    { field: "Address", headerName: "Address", width: 150 },
+    {
+      field: "actions",
+      headerName: "Actions",
+      sortable: false,
+      width: 150,
+      disableClickEventBubbling: true,
+      renderCell: (params) => {
+        return (
+          <div style={{ cursor: "pointer" }}>
+            <Link to={"/Management/add/Class/" + params.row.id}>
+              <span>
+                <FaIcons.FaEdit />
+              </span>
+            </Link>
+            <span>
+              <a
+                // onClick={(e) => {
+                //   deleteClass(e, params.row.id);
+                // }}
+              >
+                <AiIcons.AiFillDelete />
+              </a>
+            </span>
+          </div>
+        );
+      },
+    },
+  ];
+  
+
   return (
-    <div className="container-box">
-      <h2>
-      ShowroomDetails
-        </h2>
-        <div className="createButton">
-        <Link className="linkbutton" to="/OutletMedia/add/Showroom"> + Show Room </Link>
-      </div>
+    <Container sx={{  height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke"  }}>
+        <Typography
+          variant="h3"
+          textAlign={"center"}
+          paddingTop={5}
+          paddingBottom={5}
+        >
+          Show Room
+        </Typography>
+      </Container>
 
-      <table>
-        <thead>
-          <tr>
-            <td>S No</td>
-            <td>Showroom</td>
-            {/* <td>RSM</td>
-            <td>ASM</td> */}
-            <td>Manager</td>
-            <td>CUG No</td>
-            <td>Landline</td>
-            <td>E-Mail</td>
-            <td>Region</td>
-            <td>State</td>
-            <td>Address</td>
-          </tr>
-        </thead>
-        {products.map((product,i) => (
-          <tbody>
-            <tr key={i}>
-              <td> {product.id}</td>
-              <td> {product.name}</td>
-              {/* <td> {product.RSM.name}</td> */}
-              {/* <td >  { product.ASM.name ?  product.ASM.name : []}</td> */}
-              {/* <td > {product.ASM.name || [] ?  product.ASM.name : product.ASM.name}  </td>   */}
-
-              <td key={product.id}> {product.Manager.name}</td>
-
-              <td> {product.CUG_NO}</td>
-              <td> {product.Landline}</td>
-              <td> {product.E_Mail}</td>
-              <td> {product.Region.name}</td>
-              <td> {product.State.name}</td>
-              <td> {product.Address}</td>
-            </tr>
-          </tbody>
-        ))}
-      </table>
-    </div>
+      <Container sx={{ textAlign: "end"}}>
+        <Link to="/Management/add/Class">
+          <Fab color="primary" aria-label="add">
+            <AddIcon />
+          </Fab>
+        </Link>
+      </Container>
+      <Container sx={{ textAlign: "end"  }}>
+        <div style={{ width: "100%" }}>
+          <div style={{  width: "100%" ,height:650}}>
+            <DataGrid
+              rows={rows}
+              columns={columns}
+              slots={{ toolbar: GridToolbar }}
+            />
+          </div>
+        </div>
+      </Container>
+    </Container>
   );
 }
 
 export default ShowroomDetails;
-
-// {infoData.map((object, i) => {
-//     return (
-//       <div key={i}>
-//         {[
-//           object.name,
-
-//           <b className="fosfo" key={i}>
-//             {" "}
-//             {object.city}{" "}
-//           </b>,
-//           object.age,
-//         ]}
-//       </div>
-//     );
-//   })}
