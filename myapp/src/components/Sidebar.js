@@ -9,6 +9,7 @@ import { SidebarData } from "./SidebarData";
 import SubMenu from "./SubMenu";
 // import { useNavigate } from "react-router-dom";
 import LogoutPage from "../pages/LogoutPage";
+import Grid from '@mui/material/Grid';
 
 const Nav = styled.div`
   background: #15171c;
@@ -46,67 +47,65 @@ const SidebarWrap = styled.div`
 
 const Sidebar = () => {
   const [sidebar, setSidebar] = useState(false);
-  const [user,setUser] = useState(null)
-  // const navigate = useNavigate();
+  const [user, setUser] = useState(null);
 
   const showSidebar = () => setSidebar(!sidebar);
 
-
   const getUser = () => {
     const user = JSON.parse(localStorage.getItem("user"));
-    setUser(user)
+    setUser(user);
     console.log(user);
   };
 
-  useEffect(()=> {
+  useEffect(() => {
     getUser();
-  },[])
+  }, []);
 
+  const token = JSON.parse(localStorage.getItem("user") ? "true" : "false");
+
+  console.log(token);
+  useEffect(() => {
+    console.log(token);
+  }, []);
 
   return (
     <>
-      <Nav>
-        <NavIcon to="#">
-          <FaIcons.FaBars onClick={showSidebar} />
-        </NavIcon>
-        <Container sx={{ textAlign: "right" }}>
-          <Link to={"/"}>
-            <Button variant="contained">Home</Button>
-          </Link>
-          {user === null ?  
-            <Link to={"/login"}>
-              <Button variant="contained">Login</Button>
-             </Link> : 
-          //    <Button variant="contained" onClick={logout}>
-          //     LogOut
-          //  </Button>
-             <Button variant="contained" onClick={LogoutPage}>
-              LogOut
-           </Button>
+    <Grid>
+    <Grid item xs={8}>
+    
 
-          }
 
-           {/* <Link to={"/login"}>
-             <Button variant="contained">Login</Button>
-           </Link> */}
-
-           {/* <Button variant="contained" onClick={logout}>
-             LogOut
-           </Button>
-           */}
-
-        </Container>
-      </Nav>
-      <SidebarNav sidebar={sidebar}>
-        <SidebarWrap>
+      {/* <Container sx={{backgroundColor:"red"}}> */}
+        <Nav>
           <NavIcon to="#">
-            <AiIcons.AiOutlineClose onClick={showSidebar} />
+            <FaIcons.FaBars size={30} onClick={showSidebar} />
           </NavIcon>
-          {SidebarData.map((item, index) => {
-            return <SubMenu item={item} key={index}></SubMenu>;
-          })}
-        </SidebarWrap>
-      </SidebarNav>
+          <Container sx={{ textAlign: "right" }}>
+            {token === false ? (
+              <Link to={"/login"}>
+                <Button variant="contained">Login</Button>
+              </Link>
+            ) : (
+              <Button variant="contained" onClick={LogoutPage}>
+                LogOut
+              </Button>
+            )}
+          </Container>
+        </Nav>
+        <SidebarNav sidebar={sidebar}>
+          <SidebarWrap>
+            <NavIcon to="#">
+              <AiIcons.AiOutlineClose size={30} onClick={showSidebar} />
+            </NavIcon>
+            {SidebarData.map((item, index) => {
+              return <SubMenu item={item} key={index}></SubMenu>;
+            })}
+          </SidebarWrap>
+        </SidebarNav>
+      {/* </Container> */}
+            
+            </Grid>
+            </Grid>
     </>
   );
 };

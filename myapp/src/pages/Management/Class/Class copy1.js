@@ -29,7 +29,6 @@ export default function Class() {
   const [status, setStatus] = useState([]);
   const [selectStatus, setSelectStatus] = useState([]);
 
-    
   let { id } = useParams();
 
   useEffect(() => {
@@ -44,7 +43,7 @@ export default function Class() {
     }
   }, []);
 
-  console.log(id)
+  console.log(id);
 
   useEffect(() => {
     getAllClass();
@@ -102,15 +101,13 @@ export default function Class() {
               </a>
             </span>
             <span>
-                <FaIcons.FaEdit onClick={handledialogOpen} />
-              </span>
+              <FaIcons.FaEdit onClick={handledialogOpen} />
+            </span>
           </div>
         );
       },
     },
   ];
-
-  // console.log(classArray);
 
   const handledialogOpen = () => {
     setdialogOpen(true);
@@ -147,22 +144,22 @@ export default function Class() {
     e.preventDefault();
     if (classData.name !== "" && classData.status !== "") {
       if (id) {
-        ApiService.updateClass(id, classData)
+        ApiService.updateClass(id, classData);
         handledialogClose()
           // .then(navigate("/Management/class/"))
           .catch((e) => console.log(e));
       } else {
-        ApiService.saveClass(classData)
+        ApiService.saveClass(classData);
         handledialogClose()
           // .then(navigate("/Management/class/"))
           .catch((e) => console.log(e));
       }
     } else alert("Please Enter the Value");
 
-  //   ApiService.saveClass(classData)
-  //     handledialogClose()
-  //     // .then(navigate("/Management/class/"))
-  //     .catch((e) => console.log(e));
+    //   ApiService.saveClass(classData)
+    //     handledialogClose()
+    //     // .then(navigate("/Management/class/"))
+    //     .catch((e) => console.log(e));
   }
 
   return (
@@ -177,14 +174,10 @@ export default function Class() {
           Class Management
         </Typography>
       </Container>
-
       <Container sx={{ textAlign: "end" }}>
-        <Link to="/Management/add/Class">
-          <Fab color="primary" aria-label="add">
-            <AddIcon />
-          </Fab>
-        </Link>
-        <Button onClick={handledialogOpen}>Click</Button>
+        <Fab color="primary" aria-label="add" onClick={handledialogOpen}>
+          <AddIcon />
+        </Fab>
       </Container>
       <Container sx={{ textAlign: "end" }}>
         <div style={{ width: "100%" }}>
@@ -197,13 +190,9 @@ export default function Class() {
           </div>
         </div>
       </Container>
+      //////////////////// *** Dialog *** //////////////////////
       <Container>
-        <Dialog
-          open={dialogOpen}
-          onClose={handledialogClose}
-          // aria-labelledby="alert-dialog-title"
-          // aria-describedby="alert-dialog-description"
-        >
+        <Dialog open={dialogOpen} onClose={handledialogClose}>
           <DialogTitle>
             <Typography padding={3} variant="h5">
               {title()}
@@ -211,44 +200,91 @@ export default function Class() {
             </Typography>
           </DialogTitle>
           <DialogContent>
-            <div>
-              <Container
-                sx={{ width: 300, height: 400, backgroundColor: "whitesmoke" }}
-              >
-                <FormControl fullWidth>
-                  <TextField
-                    variant="outlined"
-                    label="Name"
-                    value={name}
-                    onChange={(e) => setName(e.target.value)}
-                  />
+            <Container
+              sx={{ width: 300, height: 400, backgroundColor: "whitesmoke" }}
+            >
+              <FormControl fullWidth>
+                <TextField
+                  variant="outlined"
+                  label="Name"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
 
-                  <br />
-                  <Select
-                    label="Status"
-                    value={selectStatus}
-                    onChange={handleChange}
-                  >
-                    {status.map((statu, index) => (
-                      <MenuItem value={statu.id} key={index}>
-                        {statu.name}
-                      </MenuItem>
-                    ))}
-                  </Select>
+                <br />
+                <Select
+                  label="Status"
+                  value={selectStatus}
+                  onChange={handleChange}
+                >
+                  {status.map((statu, index) => (
+                    <MenuItem value={statu.id} key={index}>
+                      {statu.name}
+                    </MenuItem>
+                  ))}
+                </Select>
 
-                  <Button variant="contained" onClick={(e) => saveClass(e)}>
-                    Click
-                  </Button>
-                  <br />
-                  <Button variant="contained" onClick={handledialogClose}>
-                    Back
-                  </Button>
-                </FormControl>
-              </Container>
-            </div>
+                <Button variant="contained" onClick={(e) => saveClass(e)}>
+                  Click
+                </Button>
+                <br />
+                <Button variant="contained" onClick={handledialogClose}>
+                  Back
+                </Button>
+              </FormControl>
+            </Container>
           </DialogContent>
         </Dialog>
       </Container>
     </Container>
   );
 }
+
+// import React from 'react';
+// import axios from 'axios';
+// import Dialog from '@material-ui/core/Dialog';
+// import DialogTitle from '@material-ui/core/DialogTitle';
+// import DialogContent from '@material-ui/core/DialogContent';
+// import DialogActions from '@material-ui/core/DialogActions';
+// import Button from '@material-ui/core/Button';
+
+// const MyDialogBox = ({ open, onClose }) => {
+//   const [formData, setFormData] = React.useState({});
+
+//   const handleChange = (e) => {
+//     const { name, value } = e.target;
+//     setFormData((prevFormData) => ({ ...prevFormData, [name]: value }));
+//   };
+
+//   const handleSubmit = (e) => {
+//     e.preventDefault();
+//     axios.post('/api/create/', formData)
+//       .then(() => {
+//         onClose();
+//       })
+//       .catch((err) => {
+//         console.error(err);
+//       });
+//   };
+
+//   return (
+//     <Dialog open={open} onClose={onClose}>
+//       <DialogTitle>Create new item</DialogTitle>
+//       <form onSubmit={handleSubmit}>
+//         <DialogContent>
+//           <label htmlFor="name">Name</label>
+//           <input type="text" name="name" onChange={handleChange} />
+//           <br />
+//           <label htmlFor="description">Description</label>
+//           <input type="text" name="description" onChange={handleChange} />
+//         </DialogContent>
+//         <DialogActions>
+//           <Button onClick={onClose}>Cancel</Button>
+//           <Button type="submit" color="primary">Create</Button>
+//         </DialogActions>
+//       </form>
+//     </Dialog>
+//   );
+// };
+
+// export default MyDialogBox;

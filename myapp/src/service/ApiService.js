@@ -136,11 +136,17 @@ class ApiService {
       return axios.get(BASE_URL + "statusManagementGet");
     }
 
-     //////////////////////////////*** ShowRoom ***///////////////////////////////////////
+    //////////////////////////////*** ShowRoom ***///////////////////////////////////////
 
      getAllShowRoomGet() {
       return axios.get(BASE_URL + "showroom");
     }
+
+    //////////////////////////////*** User ***///////////////////////////////////////
+    getAllUser() {
+      return axios.get(BASE_URL + "userList");
+    }
   }
 
 export default new ApiService();
+

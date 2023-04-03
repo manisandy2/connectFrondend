@@ -1,50 +1,45 @@
 import React, { useEffect, useState } from "react";
-import "./Styles/class.css";
 import { Link } from "react-router-dom";
 import Fab from "@mui/material/Fab";
 import AddIcon from "@mui/icons-material/Add";
 import { Container, Box } from "@mui/system";
 import * as FaIcons from "react-icons/fa";
 import * as AiIcons from "react-icons/ai";
-import ApiService from "../../../service/ApiService";
+
 import { Typography } from "@mui/material";
+import ApiService from "../../service/ApiService";
 import { DataGrid, GridToolbar } from "@mui/x-data-grid";
 
-export default function Class() {
-  const [classArray, setclassArray] = useState([]);
+function UserList() {
+  const [userArray, setuserArray] = useState([]);
 
   useEffect(() => {
-    getAllClass();
+    getAllUser();
   }, []);
-
-  const getAllClass = async () => {
-    const { data } = await ApiService.getAllClass();
+  
+  
+  const getAllUser = async () => {
+    const { data } = await ApiService.getAllUser();
     // console.log(JSON.stringify(data))
-    const classArray = data.results;
-    setclassArray(classArray);
+    const userArray = data.results;
+    setuserArray(userArray);
+    console.log(data)
   };
 
-  // console.log(ApiService.postClassAddLin k)
-
-  const rows = classArray.map((row) => ({
+  const rows = userArray.map((row) => ({
     id: row.id,
-    Name: row.name,
-    Status: row.status.name,
+    username: row.username,
+    // password: row.password,
+    groups: row.groups,
+    user_permissions: row.user_permissions,
   }));
-
-  function deleteClass(e, id) {
-    e.preventDefault();
-    if (window.confirm("Are you sure you want to delete this Class")) {
-      ApiService.deleteClass(id)
-        .then(getAllClass())
-        .catch((e) => console.log(e));
-    }
-  }
 
   const columns = [
     { field: "id", headerName: "id", width: 100 },
-    { field: "Name", headerName: "Name", width: 450 },
-    { field: "Status", headerName: "Status", width: 150 },
+    { field: "username", headerName: "username", width: 250 },
+    // { field: "password", headerName: "password", width: 150 },
+    { field: "groups", headerName: "groups", width: 150 },
+    { field: "user_permissions", headerName: "user_permissions", width: 150 },
     {
       field: "actions",
       headerName: "Actions",
@@ -61,9 +56,9 @@ export default function Class() {
             </Link>
             <span>
               <a
-                onClick={(e) => {
-                  deleteClass(e, params.row.id);
-                }}
+                // onClick={(e) => {
+                //   deleteClass(e, params.row.id);
+                // }}
               >
                 <AiIcons.AiFillDelete />
               </a>
@@ -74,21 +69,18 @@ export default function Class() {
     },
   ];
 
-  console.log(classArray);
-
   return (
-    <Container sx={{  height: "750px" }}>
-      <Container sx={{ backgroundColor: "whitesmoke"  }}>
+    <Container sx={{ height: "750px" }}>
+      <Container sx={{ backgroundColor: "whitesmoke" }}>
         <Typography
           variant="h3"
           textAlign={"center"}
           paddingTop={5}
           paddingBottom={5}
         >
-          Class Management
+          User List
         </Typography>
       </Container>
-
       <Container sx={{ textAlign: "end"}}>
         <Link to="/Management/add/Class">
           <Fab color="primary" aria-label="add">
@@ -98,7 +90,7 @@ export default function Class() {
       </Container>
       <Container sx={{ textAlign: "end"  }}>
         <div style={{ width: "100%" }}>
-          <div style={{  width: "100%" ,height:"350px"}}>
+          <div style={{  width: "100%" ,height:"650px"}}>
             <DataGrid
               rows={rows}
               columns={columns}
@@ -110,3 +102,5 @@ export default function Class() {
     </Container>
   );
 }
+
+export default UserList;

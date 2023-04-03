@@ -151,7 +151,7 @@ export const SidebarData = [
       },
       {
         title: "Users",
-        path: "/users",
+        path: "/User/UserList",
         icon: <AiIcons.AiOutlineBank />,
       },
       {
